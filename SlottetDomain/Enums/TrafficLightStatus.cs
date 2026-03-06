@@ -8,7 +8,7 @@ namespace SlottetDomain.Enums
 {
     public enum TrafficLightStatus
     {
-        Greenm,
+        Green,
         Yellow,
         Red
     }
