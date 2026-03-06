@@ -10,7 +10,7 @@ namespace SlottetDomain.Entity
     public class ResidentSchema
     {
        
-
+        public int Id { get; set; }
         public string? Name { get; set; }
         public TrafficLightStatus TrafficLight { get; set; }
 
@@ -20,8 +20,9 @@ namespace SlottetDomain.Entity
 
         public string Note {  get; set; }
 
-        public ResidentSchema(string? name, TrafficLightStatus trafficLight, List<MedicineStatus> medicineStatuses, string employee, string note)
+        public ResidentSchema(int id, string? name, TrafficLightStatus trafficLight, List<MedicineStatus> medicineStatuses, string employee, string note)
         {
+            Id = id;
             Name = name;
             TrafficLight = trafficLight;
             MedicineStatuses = medicineStatuses;
