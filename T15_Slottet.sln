@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13 d17.14
+VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T15_Slottet", "T15_Slottet\T15_Slottet.csproj", "{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetPresentation", "SlottetAPI\SlottetPresentation.csproj", "{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetApplication", "SlottetApplication\SlottetApplication.csproj", "{7570ED32-AA8F-4215-BE93-39DF318AD9B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetInfrastructure", "SlottetInfrastructure\SlottetInfrastructure.csproj", "{AA110294-E085-4C47-B75C-E92B9855F7AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetDomain", "SlottetDomain\SlottetDomain.csproj", "{57592537-8209-4935-82A9-AA94A5B93A0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA110294-E085-4C47-B75C-E92B9855F7AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA110294-E085-4C47-B75C-E92B9855F7AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA110294-E085-4C47-B75C-E92B9855F7AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA110294-E085-4C47-B75C-E92B9855F7AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57592537-8209-4935-82A9-AA94A5B93A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57592537-8209-4935-82A9-AA94A5B93A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57592537-8209-4935-82A9-AA94A5B93A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57592537-8209-4935-82A9-AA94A5B93A0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
