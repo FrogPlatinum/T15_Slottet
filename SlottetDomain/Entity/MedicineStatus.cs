@@ -8,6 +8,7 @@ namespace SlottetDomain.Entity
 {
     public class MedicineStatus
     {
+        public int Id { get; set; }
         public DateTime Time { get; set; }
         public bool Administered { get; set; }
     }
