@@ -71,9 +71,7 @@ namespace SlottetTests
 
             //Act
 
-             await repo.UpdateAsync(updatedResidentSchema);
-
-            //Assert
+            await repo.UpdateAsync(updatedResidentSchema);
 
             //Assert
             Assert.IsNotNull(updatedResidentSchema);
@@ -84,8 +82,37 @@ namespace SlottetTests
             Assert.AreEqual("Test Employee", updatedResidentSchema.Employee);
             Assert.AreEqual("Opdateret note", updatedResidentSchema.Note);
         }
-        
-       
 
+        [TestMethod]
+        public async Task DeleteAsync()
+        {
+            //Arrange: Setup resident schema and update it
+            var repo = new ResidentSchemaMemoryRepo();
+
+            var deletedResidentSchema = new ResidentSchema(
+              id: 6,
+              name: "Karl Karlson",
+              trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
+              medicineStatuses: new List<MedicineStatus>
+              {
+                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+              },
+              employee: "Hans Hansen",
+              note: "Ny borger"
+              );
+
+            await repo.AddAsync(deletedResidentSchema);
+
+            //Act
+            await repo.DeleteAsync(6);
+
+            //Assert
+            
+            var result = await repo.GetByIdAsync(6); //It only works when we call this line. Because of await/async?
+
+            Assert.IsNull(result);
+        }
     }
-}
+
+  }
+
