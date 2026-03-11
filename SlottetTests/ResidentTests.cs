@@ -18,7 +18,7 @@ namespace SlottetTests
                 trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
                 medicineStatuses: new List<MedicineStatus>
                 {
-            new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
                 },
                 employee: "Hans Hansen",
                 note: "Ny borger"
@@ -31,7 +31,11 @@ namespace SlottetTests
             Assert.IsNotNull(createdResident);
             Assert.AreEqual(4, createdResident.Id);
             Assert.AreEqual("Karl Karlson", createdResident.Name);
-
+            Assert.AreEqual(SlottetDomain.Enums.TrafficLightStatus.Yellow, createdResident.TrafficLight);
+            Assert.IsNotNull(createdResident.MedicineStatuses);
+            Assert.AreEqual("Hans Hansen", createdResident.Employee);
+            Assert.AreEqual("Ny borger", createdResident.Note);
+            //Find ud af teste nested classes, er medicinstatus id korrekt?
         }
     }
 }
