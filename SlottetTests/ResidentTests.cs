@@ -1,4 +1,5 @@
 ﻿using SlottetDomain.Entity;
+using SlottetInfrastructure;
 
 namespace SlottetTests
 {
@@ -6,33 +7,30 @@ namespace SlottetTests
     public sealed class ResidentTests
     {
         [TestMethod]
-        public void CreateResidentSchema()
+        public async Task AddAsync()
         {
             //Arrange: add new ResidentSchema
-            var newSchema = new ResidentSchema
-            {
-                Id = 1,
-                Name = "name",
-                TrafficLight = SlottetDomain.Enums.TrafficLightStatus.Red,
-                MedicineStatuses = 1,
-                Employee = "Hans",
-                Note = "Glad i dag"
+            var repo = new ResidentSchemaMemoryRepo();
 
-            };
+            var newResident = new ResidentSchema(
+                id: 4,
+                name: "Karl Karlson",
+                trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
+                medicineStatuses: new List<MedicineStatus>
+                {
+            new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                },
+                employee: "Hans Hansen",
+                note: "Ny borger"
+                );
+
             //Act
-
-            ResidentSchemaRepo.Add(newSchema);
+            var createdResident = await repo.AddAsync(newResident);
 
             //Assert
-            Assert.AreEqual(1, ??.Schemas.Count);
-
-            var addedPerson = ??.Schemas[0];
-            Assert.AreEqual(1, addedSchema.Id);
-            Assert.AreEqual("name", addedSchema.Name);
-            Assert.AreEqual(SlottetDomain.Enums.TrafficLightStatus.Red, addedSchema.TrafficLight);
-            Assert.AreEqual(1, addedSchema.MedicineStatuses);
-            Assert.AreEqual("Hans", addedSchema.Employee);
-            Assert.AreEqual("Glad i dag", addedSchema.Note);
+            Assert.IsNotNull(createdResident);
+            Assert.AreEqual(4, createdResident.Id);
+            Assert.AreEqual("Karl Karlson", createdResident.Name);
 
         }
     }

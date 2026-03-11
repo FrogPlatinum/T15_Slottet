@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SlottetApplication;
+﻿using SlottetBackend.Services;
 using SlottetDomain.Entity;
 using SlottetDomain.Enums;
 
-namespace SlottetInfrastructure
+namespace SlottetBackend.Infrastructure
 {
     public class ResidentSchemaMemoryRepo : IResidentSchemaRepo
     {
         private static List<ResidentSchema> _schemas = new List<ResidentSchema>
         {
             new ResidentSchema(
-            id:1,
+            id: 1,
             name: "Niels Hansen",
             trafficLight: TrafficLightStatus.Green,
             medicineStatuses: new List<MedicineStatus>{new MedicineStatus { Time = DateTime.Now.AddHours(-1), Administered = true}},
@@ -22,7 +17,7 @@ namespace SlottetInfrastructure
             note: "Morgenmedicin givet kl. 10:23"),
 
             new ResidentSchema(
-            id:2,
+            id: 2,
             name: "Mette Jensen",
             trafficLight: TrafficLightStatus.Red,
             medicineStatuses: new List<MedicineStatus>{new MedicineStatus { Time = DateTime.Now.AddHours(-2), Administered = false }, new MedicineStatus { Time = DateTime.Now.AddMinutes(-30), Administered = false }},
@@ -30,7 +25,7 @@ namespace SlottetInfrastructure
             note: "Aftensmertestillende mangler - ring til familie"),
 
             new ResidentSchema(
-            id:3,
+            id : 3,
             name: "Hans Pedersen",
             trafficLight: TrafficLightStatus.Yellow,
             medicineStatuses: new List<MedicineStatus>{new MedicineStatus { Time = DateTime.Now.AddHours(-3), Administered = true }, new MedicineStatus { Time = DateTime.Now.AddMinutes(-90), Administered = false }},
@@ -66,7 +61,7 @@ namespace SlottetInfrastructure
 
         public Task UpdateAsync(ResidentSchema entity)
         {
-            var existingSchema = _schemas.FirstOrDefault(x =>x.Id == entity.Id);
+            var existingSchema = _schemas.FirstOrDefault(x => x.Id == entity.Id);
             if (existingSchema != null)
             {
                 existingSchema.Name = entity.Name;
