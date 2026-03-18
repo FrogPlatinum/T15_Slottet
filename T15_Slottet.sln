@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T15_Slottet", "T15_Slottet\T15_Slottet.csproj", "{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Application", "SlottetApplication\Slottet.Application.csproj", "{7570ED32-AA8F-4215-BE93-39DF318AD9B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetPresentation", "SlottetAPI\SlottetPresentation.csproj", "{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Infrastructure", "SlottetInfrastructure\Slottet.Infrastructure.csproj", "{AA110294-E085-4C47-B75C-E92B9855F7AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetApplication", "SlottetApplication\SlottetApplication.csproj", "{7570ED32-AA8F-4215-BE93-39DF318AD9B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetInfrastructure", "SlottetInfrastructure\SlottetInfrastructure.csproj", "{AA110294-E085-4C47-B75C-E92B9855F7AC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetDomain", "SlottetDomain\SlottetDomain.csproj", "{57592537-8209-4935-82A9-AA94A5B93A0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Domain", "SlottetDomain\Slottet.Domain.csproj", "{57592537-8209-4935-82A9-AA94A5B93A0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlottetTests", "SlottetTests\SlottetTests.csproj", "{2D323BC2-0367-4E71-9264-080425E43937}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.API", "SlottetAPI\Slottet.API.csproj", "{59031989-259C-4FEA-98AD-82674F7CC636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Blazor", "Slottet.Blazor\Slottet.Blazor.csproj", "{B03C2465-BCE0-468F-A257-1D1A12F446B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20B86B2C-B0DD-44D5-B437-C6F2EA24E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0D66F79-901E-4AE9-B9BB-62BE60BD4B40}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7570ED32-AA8F-4215-BE93-39DF318AD9B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,9 +39,23 @@ Global
 		{2D323BC2-0367-4E71-9264-080425E43937}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D323BC2-0367-4E71-9264-080425E43937}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D323BC2-0367-4E71-9264-080425E43937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59031989-259C-4FEA-98AD-82674F7CC636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59031989-259C-4FEA-98AD-82674F7CC636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59031989-259C-4FEA-98AD-82674F7CC636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59031989-259C-4FEA-98AD-82674F7CC636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7570ED32-AA8F-4215-BE93-39DF318AD9B7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AA110294-E085-4C47-B75C-E92B9855F7AC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{57592537-8209-4935-82A9-AA94A5B93A0D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{59031989-259C-4FEA-98AD-82674F7CC636} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBBC85C4-B291-4D54-92C6-CE9FEC3BDD95}

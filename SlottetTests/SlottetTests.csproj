@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlottetInfrastructure\SlottetInfrastructure.csproj" />
+    <ProjectReference Include="..\SlottetInfrastructure\Slottet.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
