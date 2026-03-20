@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SlottetDomain.Entity;
+﻿using Slottet.Domain.Enums.Entity;
 
-namespace SlottetApplication
+namespace Slottet.Application
 {
     public interface IResidentSchemaRepo
     {

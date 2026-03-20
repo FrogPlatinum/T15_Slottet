@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SlottetApplication;
-using SlottetDomain.Entity;
+﻿using Slottet.Domain.Enums.Entity;
+using Slottet.Application;
 using SlottetDomain.Enums;
 
-namespace SlottetInfrastructure
+namespace Slottet.Infrastructure
 {
     public class ResidentSchemaMemoryRepo : IResidentSchemaRepo
     {

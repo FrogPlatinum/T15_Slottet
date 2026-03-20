@@ -1,5 +1,5 @@
-﻿using SlottetDomain.Entity;
-using SlottetInfrastructure;
+﻿using Slottet.Domain.Enums.Entity;
+using Slottet.Infrastructure;
 
 namespace SlottetTests
 {

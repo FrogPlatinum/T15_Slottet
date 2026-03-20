@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.13.12" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\SlottetApplication\Slottet.Application.csproj" />
+    <ProjectReference Include="..\SlottetInfrastructure\Slottet.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
