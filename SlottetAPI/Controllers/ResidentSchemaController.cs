@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Slottet.Domain.Enums.Entity;
 using Slottet.Application;
+using Slottet.Domain.Entity;
 
 namespace Slottet.API.Controllers
 {
