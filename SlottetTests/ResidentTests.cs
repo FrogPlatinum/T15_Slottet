@@ -1,4 +1,4 @@
-﻿using Slottet.Domain.Enums.Entity;
+﻿using Slottet.Domain.Entity;
 using Slottet.Infrastructure;
 
 namespace SlottetTests
@@ -15,7 +15,7 @@ namespace SlottetTests
             var newResident = new ResidentSchema(
                 id: 4,
                 name: "Karl Karlson",
-                trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
+                trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
                 medicineStatuses: new List<MedicineStatus>
                 {
                     new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
@@ -31,7 +31,7 @@ namespace SlottetTests
             Assert.IsNotNull(createdResidentSchema);
             Assert.AreEqual(4, createdResidentSchema.Id);
             Assert.AreEqual("Karl Karlson", createdResidentSchema.Name);
-            Assert.AreEqual(SlottetDomain.Enums.TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
+            Assert.AreEqual(ResidentSchema.TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
             Assert.IsNotNull(createdResidentSchema.MedicineStatuses);
             Assert.AreEqual("Hans Hansen", createdResidentSchema.Employee);
             Assert.AreEqual("Ny borger", createdResidentSchema.Note);
@@ -46,7 +46,7 @@ namespace SlottetTests
             var newResidentSchema = new ResidentSchema(
               id: 5,
               name: "Karl Karlson",
-              trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
+              trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
                     new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
@@ -60,7 +60,7 @@ namespace SlottetTests
             var updatedResidentSchema = new ResidentSchema(
             id: 5,
             name: "Niels Hansen Updated",
-            trafficLight: SlottetDomain.Enums.TrafficLightStatus.Red,
+            trafficLight: ResidentSchema.TrafficLightStatus.Red,
             medicineStatuses: new List<MedicineStatus>
             {
             new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
@@ -77,7 +77,7 @@ namespace SlottetTests
             Assert.IsNotNull(updatedResidentSchema);
             Assert.AreEqual(5, updatedResidentSchema.Id);
             Assert.AreEqual("Niels Hansen Updated", updatedResidentSchema.Name);
-            Assert.AreEqual(SlottetDomain.Enums.TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
+            Assert.AreEqual(ResidentSchema.TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
             Assert.IsNotNull(updatedResidentSchema.MedicineStatuses);
             Assert.AreEqual("Test Employee", updatedResidentSchema.Employee);
             Assert.AreEqual("Opdateret note", updatedResidentSchema.Note);
@@ -92,7 +92,7 @@ namespace SlottetTests
             var deletedResidentSchema = new ResidentSchema(
               id: 6,
               name: "Karl Karlson",
-              trafficLight: SlottetDomain.Enums.TrafficLightStatus.Yellow,
+              trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
                     new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }

@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SlottetDomain.Enums;
 
-namespace Slottet.Domain.Enums.Entity
+
+namespace Slottet.Domain.Entity
 {
     public class ResidentSchema
     {
        
         public int Id { get; set; }
         public string? Name { get; set; }
+        public enum TrafficLightStatus
+        {
+            Green,
+            Yellow,
+            Red
+        }
         public TrafficLightStatus TrafficLight { get; set; }
 
         public List<MedicineStatus> MedicineStatuses { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Slottet.Domain.Enums.Entity
+namespace Slottet.Domain.Entity
 {
     public class MedicineStatus
     {
