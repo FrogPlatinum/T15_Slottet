@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SlottetDomain.Enums;
 
 namespace Slottet.Domain.Entity
 {
@@ -35,7 +35,11 @@ namespace Slottet.Domain.Entity
             Employee = employee;
             Note = note;
         }
-
+        //Empty constructor for EF Core
+        public ResidentSchema()
+        {
+            
+        }
 
     }
 }
