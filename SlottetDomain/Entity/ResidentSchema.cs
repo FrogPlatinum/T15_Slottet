@@ -12,6 +12,12 @@ namespace Slottet.Domain.Entity
        
         public int Id { get; set; }
         public string? Name { get; set; }
+        public enum TrafficLightStatus
+        {
+            Green,
+            Yellow,
+            Red
+        }
         public TrafficLightStatus TrafficLight { get; set; }
 
         public List<MedicineStatus> MedicineStatuses { get; set; }
