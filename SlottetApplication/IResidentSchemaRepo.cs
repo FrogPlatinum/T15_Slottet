@@ -1,4 +1,4 @@
-﻿using Slottet.Domain.Enums.Entity;
+﻿using Slottet.Domain.Entity;
 
 namespace Slottet.Application
 {

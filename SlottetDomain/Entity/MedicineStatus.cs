@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Slottet.Domain.Enums.Entity
+namespace Slottet.Domain.Entity
 {
     public class MedicineStatus
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public bool Administered { get; set; }
+        public int ResidentSchemaId { get; set; }
+        public ResidentSchema ResidentSchema { get; set; }
     }
 }

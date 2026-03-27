@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SlottetDomain.Enums;
 
-namespace Slottet.Domain.Enums.Entity
+namespace Slottet.Domain.Entity
 {
     public class ResidentSchema
     {
@@ -29,7 +29,11 @@ namespace Slottet.Domain.Enums.Entity
             Employee = employee;
             Note = note;
         }
-
+        //Empty constructor for EF Core
+        public ResidentSchema()
+        {
+            
+        }
 
     }
 }
