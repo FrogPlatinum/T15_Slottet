@@ -1,16 +1,28 @@
-﻿using Slottet.Domain.Entity;
+﻿using Microsoft.Identity.Client;
+using Slottet.Domain.Entity;
 using Slottet.Infrastructure;
+using Slottet.Infrastructure.Data;
 
 namespace SlottetTests
 {
     [TestClass]
     public sealed class ResidentTests
     {
+        private ResidentSchemaDBrepo _residentDBRepo;
+
+        [TestInitialize]
+        public void Init()
+        {
+            string conString = "Server=localhost;Database=SlottetDB;Trusted_Connection=True;TrustServerCertificate=True;";
+            _residentDBRepo = new ResidentSchemaDBrepo(AppDbContext);
+        }
+
         [TestMethod]
         public async Task AddAsync()
         {
             //Arrange: add new ResidentSchema
-            var repo = new ResidentSchemaMemoryRepo();
+            
+            var repo = new ResidentSchemaDBrepo(AppDbContext conString);
 
             var newResident = new ResidentSchema(
                 id: 4,
