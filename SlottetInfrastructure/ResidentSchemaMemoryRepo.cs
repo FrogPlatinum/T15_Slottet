@@ -1,5 +1,4 @@
 ﻿using Slottet.Application;
-using Slottet.Domain.Enums;
 using Slottet.Domain.Entity;
 
 namespace Slottet.Infrastructure
