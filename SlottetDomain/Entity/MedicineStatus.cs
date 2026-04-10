@@ -11,7 +11,6 @@ namespace Slottet.Domain.Entity
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public bool Administered { get; set; }
-        public int ResidentSchemaId { get; set; }
-        public ResidentSchema ResidentSchema { get; set; }
+        public int ResidentSchemaId { get; set; }        
     }
 }

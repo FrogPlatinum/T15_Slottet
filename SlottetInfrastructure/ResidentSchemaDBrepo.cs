@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Slottet.Application;
 using Slottet.Domain.Entity;
 using Slottet.Infrastructure.Data;
@@ -12,16 +13,17 @@ namespace Slottet.Infrastructure
     public class ResidentSchemaDBrepo : IResidentSchemaRepo
     {
         private AppDbContext _databaseRepo;
-        private List<ResidentSchema> _residentSchemas;
 
         public ResidentSchemaDBrepo(AppDbContext dbContext)
         {
             _databaseRepo = dbContext;
-            _residentSchemas = _databaseRepo.ResidentSchemas.ToList();
+            
         }
-        public Task<ResidentSchema> AddAsync(ResidentSchema entity)
+        public async Task<ResidentSchema> AddAsync(ResidentSchema entity)
         {
-            throw new NotImplementedException();
+            _databaseRepo.ResidentSchemas.Add(entity);
+            await _databaseRepo.SaveChangesAsync();
+            return entity;
         }
 
         public Task DeleteAsync(int id)
@@ -29,9 +31,9 @@ namespace Slottet.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ResidentSchema>> GetAllAsync()
+        public async Task<IEnumerable<ResidentSchema>> GetAllAsync()
         {
-            throw new NotImplementedException();
+           return await _databaseRepo.ResidentSchemas.ToListAsync();
         }
 
         public Task<ResidentSchema> GetByIdAsync(int id)
