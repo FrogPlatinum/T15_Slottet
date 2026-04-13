@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.API", "SlottetAPI\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Blazor", "Slottet.Blazor\Slottet.Blazor.csproj", "{B03C2465-BCE0-468F-A257-1D1A12F446B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Slottet.Shared", "Slottet.Shared", "{9D76655E-0FC5-4F78-B18E-9883E8A7E68C}"
+	ProjectSection(SolutionItems) = preProject
+		ResidentSchemaDto.cs = ResidentSchemaDto.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
