@@ -59,12 +59,12 @@ namespace SlottetTests
         {
             //Arrange: Setup resident schema and update it
             var newResidentSchema = new ResidentSchema(
-              id: 5,
+              id: 600,
               name: "Karl Karlson",
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 300, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
@@ -73,12 +73,12 @@ namespace SlottetTests
             await _residentDBRepo.AddAsync(newResidentSchema);
 
             var updatedResidentSchema = new ResidentSchema(
-            id: 5,
+            id: 600,
             name: "Niels Hansen Updated",
             trafficLight: ResidentSchema.TrafficLightStatus.Red,
             medicineStatuses: new List<MedicineStatus>
             {
-            new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+            new MedicineStatus { Id = 300, Time = DateTime.Now, Administered = true }
              },
             employee: "Test Employee",
             note: "Opdateret note"
@@ -90,7 +90,7 @@ namespace SlottetTests
 
             //Assert
             Assert.IsNotNull(updatedResidentSchema);
-            Assert.AreEqual(5, updatedResidentSchema.Id);
+            Assert.AreEqual(600, updatedResidentSchema.Id);
             Assert.AreEqual("Niels Hansen Updated", updatedResidentSchema.Name);
             Assert.AreEqual(ResidentSchema.TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
             Assert.IsNotNull(updatedResidentSchema.MedicineStatuses);
@@ -104,12 +104,12 @@ namespace SlottetTests
             //Arrange: Setup resident schema and update it
 
             var deletedResidentSchema = new ResidentSchema(
-              id: 6,
+              id: 700,
               name: "Karl Karlson",
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 200, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
@@ -118,10 +118,10 @@ namespace SlottetTests
             await _residentDBRepo.AddAsync(deletedResidentSchema);
 
             //Act
-            await _residentDBRepo.DeleteAsync(6);
+            await _residentDBRepo.DeleteAsync(700);
 
             //Assert
-            var result = await _residentDBRepo.GetByIdAsync(6); //It only works when we call this line. Because of await/async?
+            var result = await _residentDBRepo.GetByIdAsync(700); //It only works when we call this line. Because of await/async?
             Assert.IsNull(result);
         }
     }
