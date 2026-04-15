@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Slottet.Shared\Slottet.Shared.csproj" />
     <ProjectReference Include="..\SlottetApplication\Slottet.Application.csproj" />
     <ProjectReference Include="..\SlottetInfrastructure\Slottet.Infrastructure.csproj" />
   </ItemGroup>

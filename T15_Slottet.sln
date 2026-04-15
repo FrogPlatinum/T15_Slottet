@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.API", "SlottetAPI\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Blazor", "Slottet.Blazor\Slottet.Blazor.csproj", "{B03C2465-BCE0-468F-A257-1D1A12F446B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slottet.Shared", "Slottet.Shared\Slottet.Shared.csproj", "{EA730580-ACA4-4093-8564-CB100AF80EDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B03C2465-BCE0-468F-A257-1D1A12F446B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA730580-ACA4-4093-8564-CB100AF80EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA730580-ACA4-4093-8564-CB100AF80EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA730580-ACA4-4093-8564-CB100AF80EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA730580-ACA4-4093-8564-CB100AF80EDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
