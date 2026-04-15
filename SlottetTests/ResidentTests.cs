@@ -30,12 +30,12 @@ namespace SlottetTests
         {
             //Arrange: add new ResidentSchema
             var newResident = new ResidentSchema(
-                id: 4,
+                id: 2,
                 name: "Karl Karlson",
                 trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
                 medicineStatuses: new List<MedicineStatus>
                 {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 2, Time = DateTime.Now, Administered = true }
                 },
                 employee: "Hans Hansen",
                 note: "Ny borger"
@@ -46,7 +46,7 @@ namespace SlottetTests
 
             //Assert
             Assert.IsNotNull(createdResidentSchema);
-            Assert.AreEqual(4, createdResidentSchema.Id);
+            Assert.AreEqual(2, createdResidentSchema.Id);
             Assert.AreEqual("Karl Karlson", createdResidentSchema.Name);
             Assert.AreEqual(ResidentSchema.TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
             Assert.IsNotNull(createdResidentSchema.MedicineStatuses);
@@ -64,7 +64,7 @@ namespace SlottetTests
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
@@ -109,7 +109,7 @@ namespace SlottetTests
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
