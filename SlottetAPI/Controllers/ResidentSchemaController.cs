@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Slottet.Application;
+using Slottet.Application.DTOs.Resident;
 using Slottet.Domain.Entity;
 
 namespace Slottet.API.Controllers
@@ -29,20 +31,73 @@ namespace Slottet.API.Controllers
             return Ok(resident);
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> AddAsync(ResidentSchema entity) // Changed from residentSchema to entity for consistency
+        //{
+        //    await _residentSchemaRepo.AddAsync(entity);
+        //    return Ok();
+        //}
+
+        // DTO AddAsync to handle incoming data
         [HttpPost]
-        public async Task<IActionResult> AddAsync(ResidentSchema residentSchema)
+        public async Task<IActionResult> AddAsync(CreateResidentSchemaDto dto)
         {
-            await _residentSchemaRepo.AddAsync(residentSchema);
+            var entity = new ResidentSchema
+            {
+                Name = dto.Name,
+                TrafficLight = (ResidentSchema.TrafficLightStatus)dto.TrafficLight,
+                Employee = dto.Employee,
+                Note = dto.Note,
+                MedicineStatuses = dto.MedicineStatuses.Select(x => new MedicineStatus
+                {
+                    Time = x.Time,
+                    Administered = x.Administered
+                }).ToList()
+            };
+
+            await _residentSchemaRepo.AddAsync(entity);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, ResidentSchema entity)
+        public async Task<IActionResult> UpdateAsync(UpdateResidentSchemaDto dto)
         {
-            if(id != entity.Id) return BadRequest("Inkorrekt id");
-                await _residentSchemaRepo.UpdateAsync(entity);
-            return Ok(entity);
+            var existing = await _residentSchemaRepo.GetByIdAsync(dto.Id);
+
+            if (existing == null)
+                return NotFound();
+
+            // Update resident fields with DTO values
+            existing.Name = dto.Name;
+            existing.Employee = dto.Employee;
+            existing.Note = dto.Note;
+            existing.TrafficLight = (ResidentSchema.TrafficLightStatus)dto.TrafficLight;
+
+            // Update medicine statuses by matching IDs
+            foreach (var updatedStatus in dto.MedicineStatuses)
+            {
+                var existingStatus = existing.MedicineStatuses
+                    .FirstOrDefault(x => x.Id == updatedStatus.Id);
+
+                if (existingStatus != null)
+                {
+                    existingStatus.Administered = updatedStatus.Administered;
+                }
+            }
+
+            await _residentSchemaRepo.UpdateAsync(existing);
+
+            return Ok(existing);
         }
+
+
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateAsync(int id, ResidentSchema entity)
+        //{
+        //    if(id != entity.Id) return BadRequest("Inkorrekt id");
+        //        await _residentSchemaRepo.UpdateAsync(entity);
+        //    return Ok(entity);
+        //}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)

@@ -18,11 +18,12 @@ namespace Slottet.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Relationship
-            //modelBuilder.Entity<ResidentSchema>()
-            //    .HasMany(r => r.MedicineStatuses)
-            //    .WithOne(m => m.ResidentSchemaId)
-            //    .HasForeignKey(m => m.ResidentSchemaId)
-            //    .IsRequired();
+            modelBuilder.Entity<ResidentSchema>()
+                .HasMany(r => r.MedicineStatuses)
+                .WithOne(m => m.ResidentSchema) // Configure the relationship between ResidentSchema and MedicineStatus
+                .HasForeignKey(m => m.ResidentSchemaId)
+                .OnDelete(DeleteBehavior.Cascade) // Cascade delete to ensure related MedicineStatus entries are deleted when a ResidentSchema is deleted
+                .IsRequired();
 
             //Seeding
             modelBuilder.Entity<ResidentSchema>().HasData(

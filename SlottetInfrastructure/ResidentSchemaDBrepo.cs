@@ -26,9 +26,16 @@ namespace Slottet.Infrastructure
             return entity;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            // Find the entity by id
+            var entity = await _databaseRepo.ResidentSchemas.FindAsync(id);
+            
+            if (entity == null)
+                return;
+
+            _databaseRepo.ResidentSchemas.Remove(entity);
+            await _databaseRepo.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ResidentSchema>> GetAllAsync()
@@ -36,14 +43,20 @@ namespace Slottet.Infrastructure
            return await _databaseRepo.ResidentSchemas.ToListAsync();
         }
 
-        public Task<ResidentSchema> GetByIdAsync(int id)
+        public async Task<ResidentSchema> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _databaseRepo.ResidentSchemas.FindAsync(id);
         }
 
-        public Task UpdateAsync(ResidentSchema entity)
+        public async Task UpdateAsync(ResidentSchema entity)
         {
-            throw new NotImplementedException();
+            var existingEntity = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
+            if (existingEntity == null)
+                return;
+
+            // Update the properties of the existing entity
+            _databaseRepo.Entry(existingEntity).CurrentValues.SetValues(entity); // Entry and SetValues are EF Core methods to update the entity's properties
+            await _databaseRepo.SaveChangesAsync();
         }
     }
 }

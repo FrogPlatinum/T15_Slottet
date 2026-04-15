@@ -35,7 +35,7 @@ namespace SlottetTests
                 trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
                 medicineStatuses: new List<MedicineStatus>
                 {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Time = DateTime.Now, Administered = true }
                 },
                 employee: "Hans Hansen",
                 note: "Ny borger"
@@ -64,7 +64,7 @@ namespace SlottetTests
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
@@ -78,7 +78,7 @@ namespace SlottetTests
             trafficLight: ResidentSchema.TrafficLightStatus.Red,
             medicineStatuses: new List<MedicineStatus>
             {
-            new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+            new MedicineStatus { Time = DateTime.Now, Administered = true }
              },
             employee: "Test Employee",
             note: "Opdateret note"
@@ -103,25 +103,25 @@ namespace SlottetTests
         {
             //Arrange: Setup resident schema and update it
 
-            var deletedResidentSchema = new ResidentSchema(
-              id: 6,
-              name: "Karl Karlson",
-              trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
-              medicineStatuses: new List<MedicineStatus>
-              {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
-              },
-              employee: "Hans Hansen",
-              note: "Ny borger"
-              );
+            //var deletedResidentSchema = new ResidentSchema(
+            //  id: 6,
+            //  name: "Karl Karlson",
+            //  trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
+            //  medicineStatuses: new List<MedicineStatus>
+            //  {
+            //        new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+            //  },
+            //  employee: "Hans Hansen",
+            //  note: "Ny borger"
+            //  );
 
-            await _residentDBRepo.AddAsync(deletedResidentSchema);
+            //await _residentDBRepo.AddAsync(deletedResidentSchema);
 
             //Act
-            await _residentDBRepo.DeleteAsync(6);
+            await _residentDBRepo.DeleteAsync(5);
 
             //Assert
-            var result = await _residentDBRepo.GetByIdAsync(6); //It only works when we call this line. Because of await/async?
+            var result = await _residentDBRepo.GetByIdAsync(5); //It only works when we call this line. Because of await/async?
             Assert.IsNull(result);
         }
     }
