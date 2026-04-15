@@ -18,11 +18,11 @@ namespace Slottet.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Relationship
-            modelBuilder.Entity<ResidentSchema>()
-                .HasMany(r => r.MedicineStatuses)
-                .WithOne(m => m.ResidentSchema)
-                .HasForeignKey(m => m.ResidentSchemaId)
-                .IsRequired();
+            //modelBuilder.Entity<ResidentSchema>()
+            //    .HasMany(r => r.MedicineStatuses)
+            //    .WithOne(m => m.ResidentSchemaId)
+            //    .HasForeignKey(m => m.ResidentSchemaId)
+            //    .IsRequired();
 
             //Seeding
             modelBuilder.Entity<ResidentSchema>().HasData(

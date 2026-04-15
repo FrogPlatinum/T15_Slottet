@@ -1,35 +1,52 @@
-﻿using Slottet.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using Slottet.Domain.Entity;
 using Slottet.Infrastructure;
+using Slottet.Infrastructure.Data;
 
 namespace SlottetTests
 {
     [TestClass]
     public sealed class ResidentTests
     {
+        private ResidentSchemaDBrepo _residentDBRepo;
+        private AppDbContext _context;
+
+        [TestInitialize]
+        public void Init()
+        {
+            var config = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase("TestDB")
+                .Options;
+
+            _context = new AppDbContext(config);
+            _context.Database.EnsureCreated();
+
+            _residentDBRepo = new ResidentSchemaDBrepo(_context);
+        }
+
         [TestMethod]
         public async Task AddAsync()
         {
             //Arrange: add new ResidentSchema
-            var repo = new ResidentSchemaMemoryRepo();
-
             var newResident = new ResidentSchema(
-                id: 4,
+                id: 2,
                 name: "Karl Karlson",
                 trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
                 medicineStatuses: new List<MedicineStatus>
                 {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 2, Time = DateTime.Now, Administered = true }
                 },
                 employee: "Hans Hansen",
                 note: "Ny borger"
                 );
 
             //Act
-            var createdResidentSchema = await repo.AddAsync(newResident);
+            var createdResidentSchema = await _residentDBRepo.AddAsync(newResident);
 
             //Assert
             Assert.IsNotNull(createdResidentSchema);
-            Assert.AreEqual(4, createdResidentSchema.Id);
+            Assert.AreEqual(2, createdResidentSchema.Id);
             Assert.AreEqual("Karl Karlson", createdResidentSchema.Name);
             Assert.AreEqual(ResidentSchema.TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
             Assert.IsNotNull(createdResidentSchema.MedicineStatuses);
@@ -41,21 +58,19 @@ namespace SlottetTests
         public async Task UpdateAsync()
         {
             //Arrange: Setup resident schema and update it
-            var repo = new ResidentSchemaMemoryRepo();
-
             var newResidentSchema = new ResidentSchema(
               id: 5,
               name: "Karl Karlson",
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
               );
 
-            await repo.AddAsync(newResidentSchema);
+            await _residentDBRepo.AddAsync(newResidentSchema);
 
             var updatedResidentSchema = new ResidentSchema(
             id: 5,
@@ -71,7 +86,7 @@ namespace SlottetTests
 
             //Act
 
-            await repo.UpdateAsync(updatedResidentSchema);
+            await _residentDBRepo.UpdateAsync(updatedResidentSchema);
 
             //Assert
             Assert.IsNotNull(updatedResidentSchema);
@@ -87,7 +102,6 @@ namespace SlottetTests
         public async Task DeleteAsync()
         {
             //Arrange: Setup resident schema and update it
-            var repo = new ResidentSchemaMemoryRepo();
 
             var deletedResidentSchema = new ResidentSchema(
               id: 6,
@@ -95,21 +109,19 @@ namespace SlottetTests
               trafficLight: ResidentSchema.TrafficLightStatus.Yellow,
               medicineStatuses: new List<MedicineStatus>
               {
-                    new MedicineStatus { Id = 1, Time = DateTime.Now, Administered = true }
+                    new MedicineStatus { Id = 3, Time = DateTime.Now, Administered = true }
               },
               employee: "Hans Hansen",
               note: "Ny borger"
               );
 
-            await repo.AddAsync(deletedResidentSchema);
+            await _residentDBRepo.AddAsync(deletedResidentSchema);
 
             //Act
-            await repo.DeleteAsync(6);
+            await _residentDBRepo.DeleteAsync(6);
 
             //Assert
-            
-            var result = await repo.GetByIdAsync(6); //It only works when we call this line. Because of await/async?
-
+            var result = await _residentDBRepo.GetByIdAsync(6); //It only works when we call this line. Because of await/async?
             Assert.IsNull(result);
         }
     }
