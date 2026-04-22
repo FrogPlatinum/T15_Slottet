@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Slottet.Application;
 using Slottet.Domain.Entity;
 using Slottet.Infrastructure.Data;
+using Slottet.Shared;
 
 
 namespace Slottet.Infrastructure
@@ -39,32 +40,33 @@ namespace Slottet.Infrastructure
             return;
         }
 
-        public async Task<IEnumerable<ResidentSchema>> GetAllAsync()
-        {
-           return await _databaseRepo.ResidentSchemas.ToListAsync();
-        }
-
-        public async Task<ResidentSchema> GetByIdAsync(int id)
-        {
-                return await _databaseRepo.ResidentSchemas.FindAsync(id);
-        }
-
         public async Task UpdateAsync(ResidentSchema entity)
         {
-            var schemaUpdate = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
-            //if (schemaUpdate != null)
-            //{
-            //    schemaUpdate.Name = entity.Name;
-            //    schemaUpdate.TrafficLight = entity.TrafficLight;
-            //    schemaUpdate.MedicineStatuses = entity.MedicineStatuses;
-            //    schemaUpdate.Employee = entity.Employee;
-            //    schemaUpdate.Note = entity.Note;
-            //}
-            _databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
-            //_databaseRepo.ResidentSchemas.Update(entity);
-            await _databaseRepo.SaveChangesAsync(); 
-            return;
+            _databaseRepo.ResidentSchemas.Update(entity);
+            await _databaseRepo.SaveChangesAsync();
+        }
 
+        public async Task<ResidentSchemaDto> GetByIdAsync(int id)
+        {
+            return await _databaseRepo.ResidentSchemas
+                .AsNoTracking()
+                .Where(r => r.Id == id)
+                .Select(r => new ResidentSchemaDto
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    TrafficLight = r.TrafficLight,
+                    MedicineStatuses = r.MedicineStatuses,
+                    Employee = r.Employee,
+                    Note = r.Note,
+
+                })
+                
+        }
+
+        public async Task<ResidentSchemaDto[]> IResidentSchemaRepo.GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

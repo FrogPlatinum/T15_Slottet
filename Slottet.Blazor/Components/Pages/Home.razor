@@ -1,7 +1,31 @@
 ﻿@page "/"
+@using Slottet.Blazor.Interface
+@using Slottet.Shared
+@inject IResidentSchemaService ResidentSchemaService
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+@if (residents == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var r in residents)
+    {
+        <p>@r.Name</p>
+    }
+}
+
+@code {
+    private IEnumerable<ResidentSchemaDto>? residents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        residents = await ResidentSchemaService.GetAllAsync();
+    }
+}

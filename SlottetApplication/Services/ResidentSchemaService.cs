@@ -1,12 +1,16 @@
-﻿using Slottet.Application;
-using Slottet.Domain.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Slottet.Application.Interfaces;
 using Slottet.Shared;
 
-namespace Slottet.Infrastructure
+namespace Slottet.Application.Services
 {
-    public class ResidentSchemaMemoryRepo : IResidentSchemaRepo
+    public class ResidentSchemaService : IResidentSchemaService
     {
-        public Task<ResidentSchema> AddAsync(ResidentSchema entity)
+        public Task<ResidentSchemaDto> AddAsync(ResidentSchemaDto entity)
         {
             throw new NotImplementedException();
         }
@@ -16,7 +20,7 @@ namespace Slottet.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task<ResidentSchemaDto[]> GetAllAsync()
+        public Task<IEnumerable<ResidentSchemaDto>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
@@ -26,7 +30,7 @@ namespace Slottet.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(ResidentSchema entity)
+        public Task UpdateAsync(ResidentSchemaDto entity)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Slottet.Application;
 using Slottet.Domain.Entity;
+using Slottet.Shared;
 
 namespace Slottet.API.Controllers
 {
@@ -9,6 +10,7 @@ namespace Slottet.API.Controllers
     public class ResidentSchemaController : Controller
     {
         private readonly IResidentSchemaRepo _residentSchemaRepo;
+        private readonly List<ResidentSchemaDto> schemaDtos;
 
         public ResidentSchemaController(IResidentSchemaRepo residentRepo)
         {
@@ -16,10 +18,12 @@ namespace Slottet.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IEnumerable<ResidentSchemaDto>> GetAll()
         {
-            var residents = await _residentSchemaRepo.GetAllAsync();
-            return Ok(residents);
+            //var residents = await _residentSchemaRepo.GetAllAsync();
+            //return Ok(residents);
+            var schemas = await _residentSchemaRepo.GetAllAsync().
+
         }
 
         [HttpGet("{id}")]

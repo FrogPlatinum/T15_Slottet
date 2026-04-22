@@ -1,9 +1,17 @@
 using Slottet.Blazor.Components;
+using Slottet.Blazor.Interface;
+using Slottet.Blazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+
+builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:7209")
+});
 
 var app = builder.Build();
 
