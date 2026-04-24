@@ -1,6 +1,6 @@
 ﻿using Slottet.Domain.Entity;
 
-namespace Slottet.Application
+namespace Slottet.Application.Interfaces
 {
     public interface IResidentSchemaRepo
     {

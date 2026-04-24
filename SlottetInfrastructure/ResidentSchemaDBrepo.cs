@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Slottet.Application;
+using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Infrastructure.Data;
 
@@ -41,7 +41,7 @@ namespace Slottet.Infrastructure
 
         public async Task<IEnumerable<ResidentSchema>> GetAllAsync()
         {
-           return await _databaseRepo.ResidentSchemas.ToListAsync();
+                return await _databaseRepo.ResidentSchemas.ToListAsync();
         }
 
         public async Task<ResidentSchema> GetByIdAsync(int id)
