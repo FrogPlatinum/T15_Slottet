@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Slottet.Application;
-using Slottet.Domain.Entity;
+using Slottet.Application.Interfaces;
+using Slottet.Shared.DTOs.ResidentSchema;
 
 namespace Slottet.API.Controllers
 {
@@ -8,46 +8,48 @@ namespace Slottet.API.Controllers
     [Route("api/[controller]")]
     public class ResidentSchemaController : Controller
     {
-        private readonly IResidentSchemaRepo _residentSchemaRepo;
+        private readonly IResidentSchemaService _residentSchemaRepo;
 
-        public ResidentSchemaController(IResidentSchemaRepo residentRepo)
+        public ResidentSchemaController(IResidentSchemaService residentRepoDto)
         {
-            _residentSchemaRepo = residentRepo;
+            _residentSchemaRepo = residentRepoDto;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var residents = await _residentSchemaRepo.GetAllAsync();
+            var residents = await _residentSchemaRepo.GetAllResidentSchemasAsync();
             return Ok(residents);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var resident = await _residentSchemaRepo.GetByIdAsync(id);
+            var resident = await _residentSchemaRepo.GetResidentSchemaByIdAsync(id);
             return Ok(resident);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(ResidentSchema residentSchema)
+        public async Task<IActionResult> AddAsync(CreateResidentSchemaDto residentSchema)
         {
-            await _residentSchemaRepo.AddAsync(residentSchema);
+            await _residentSchemaRepo.AddResidentSchemaAsync(residentSchema);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, ResidentSchema entity)
+        [HttpPut("{id}")] //To do
+        public async Task<IActionResult> UpdateAsync(int id, UpdateResidentSchemaDto entity)
         {
-            if(id != entity.Id) return BadRequest("Inkorrekt id");
-                await _residentSchemaRepo.UpdateAsync(entity);
-            return Ok(entity);
+            //if(id != entity.Id) return BadRequest("Inkorrekt id");
+            //    await _residentSchemaRepo.UpdateAsync(entity);
+            //return Ok(entity);
+
+            throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            await _residentSchemaRepo.DeleteAsync(id);
+            await _residentSchemaRepo.DeleteResidentSchemaAsync(id);
             return Ok();
         }
 
