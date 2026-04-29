@@ -15,7 +15,7 @@ namespace Slottet.API.Controllers
             _residentSchemaRepo = residentRepoDto;
         }
 
-        [HttpGet]
+        [HttpGet("allschemas")]
         public async Task<IActionResult> GetAll()
         {
             var residents = await _residentSchemaRepo.GetAllResidentSchemasAsync();
