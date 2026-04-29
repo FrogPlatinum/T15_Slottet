@@ -1,28 +1,25 @@
-﻿@page "/"
-@using Slottet.Shared.DTOs.ResidentSchema
+﻿@using Slottet.Shared.DTOs.ResidentSchema
 @inject HttpClient Http
+@page "/residentschema"
 
-<PageTitle>Home</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
 
 <h1> Resident Schemas</h1>
 
-<ul>
+
 	@foreach (var schema in _schemas)
 	{
+		<div class="ResidentSchema">
+		<ul>
 		<li>@schema.Name</li>
+		<li>@schema.TrafficLight</li>
+		<li>@schema.MedicineStatuses</li>
+		<li>@schema.Employee</li>
+		<li>@schema.Note</li>
+		</ul>
+		</div>
 	}
-</ul>
 
-<h1> Resident Schemas from page</h1>
-<ResidentSchema/>
-
-
-
-@code{
+@code {
 
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
 
