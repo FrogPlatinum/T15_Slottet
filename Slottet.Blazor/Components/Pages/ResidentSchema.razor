@@ -1,0 +1,85 @@
+﻿@using Slottet.Shared.DTOs.ResidentSchema
+@inject HttpClient Http
+@page "/residentschema"
+
+
+	@foreach (var schema in _schemas)
+	{
+		<!--
+	Step 1
+	Tilføj bokse
+
+	Step 2
+	Sørg for at oplysningerne er fra database
+
+	Step 3
+	Tilføj CSS kode med borders og linjeafstand
+
+	Step 4
+	Tilføj de andre bokse
+
+	Step 5
+	Make it pretty
+	-->
+
+	<div class="">
+		<div class="">
+			<table>
+				<tr>
+					<th>@schema.Name</th>
+				</tr>
+				<tr>
+					<th>Status (trafik)</th>
+				</tr>
+				<tr> <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
+					<td>Rød</td>
+					<td>Gul</td>
+					<td>Grøn</td>
+				</tr>
+				<tr>
+					<th>Medicintid</th>
+				</tr>
+				<tr>
+					<td>12:00</td>
+					<td>15:00</td>
+					<td>17:00</td>
+					<td>17:30</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td><input type="checkbox" /></td>
+					<td><input type="checkbox" /></td>
+					<td><input type="checkbox" /></td>
+				</tr>
+				<tr>
+					<th>Personale</th>
+				</tr>
+				<tr>
+					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
+
+				</tr>
+				<tr>
+					<th>Note</th>
+				</tr>
+				<tr>
+					<td>@schema.Note</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	}
+
+@code {
+
+	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetAllResidentSchemas();
+	}
+
+	public async Task GetAllResidentSchemas()
+	{
+		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
+	}
+}
