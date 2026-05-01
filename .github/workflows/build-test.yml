@@ -1,0 +1,28 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, developer ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0
+    
+    - name: Restore dependencies
+      run: dotnet restore T15_Slottet.sln
+    
+    - name: Build
+      run: dotnet build T15_Slottet.sln --no-restore 
+    
+    - name: Test
+      run: dotnet test T15_Slottet.sln --no-build --verbosity normal
