@@ -2,37 +2,14 @@
 @using Slottet.Shared.DTOs.ResidentSchema
 @inject HttpClient Http
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Driftstavle</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<h1> Resident Schemas</h1>
-
-<ul>
-	@foreach (var schema in _schemas)
-	{
-		<li>@schema.Name</li>
-	}
-</ul>
-
-<h1> Resident Schemas from page</h1>
+<h1>Driftstavle</h1>
 <ResidentSchema/>
 
 
 
 @code{
 
-	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
 
-	protected override async Task OnInitializedAsync()
-	{
-		await GetAllResidentSchemas();
-	}
-
-	public async Task GetAllResidentSchemas()
-	{
-		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
-	}
 }
