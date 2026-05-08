@@ -1,11 +1,8 @@
 ﻿/*Jeg ved denne css skal være i vores wwwroot, men jeg kunne ikke lige huske hvordan man gjorde :o)*/
 
 /*All Schemas*/
-h1 {
-    font-family: 'Verdana';
-}
 .allSchemas {
-    background-color: cornflowerblue; 
+    background-color: steelblue; 
     max-width: max-content;
 }
 .allSchemas {
@@ -23,26 +20,49 @@ h1 {
 /*Individual Schemas*/
 .individualSchemas {
     font-family: 'Verdana';
-    background-color: lightblue
+    background-color: aliceblue;
 }
 .individualSchemas {
+    border-top-left-radius: 25px;
     border-radius: 25px;
-    border: 2px; 
+    border: 2px;
     box-shadow: 7px 7px 7px;
-    padding: 20px;
-   
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
-.individualSchemas {
+/*.individualSchemas {
     max-width: max-content
+}*/
+
+/*Table formatting*/
+td {
+    width: 150px;
+    text-align: center;
 }
-/*Name Section*/
-.residentName {
-background-color: aquamarine
+th {
+    background-color: lightblue;
+    text-align: center;
+    padding: 5px;
 }
-/*Traffic Light Section*/
-
-/*Medicine Status Section*/
-
-/*Employee Section*/
-
-/*Note Section*/
+tr {
+    text-align: center;
+    padding: 5px;
+}
+h1 {
+    font-family: 'Verdana';
+}
+.Name {
+    background-color: transparent;
+}
+.trafficRed{
+    background-color:red;
+    color: white;
+    
+}
+.trafficYellow {
+    background-color: yellow;
+}
+.trafficGreen {
+    background-color: green;
+    color: white;
+}

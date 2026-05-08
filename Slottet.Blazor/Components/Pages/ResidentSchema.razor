@@ -29,75 +29,77 @@
 {
 <div class="individualSchemas">
 
-			<table>
-				<div class="residentName">
+			<table style="width:100%">
+				
 				<tr>
-					<th><h2>@schema.Name</h2></th>
-				</tr>
-				</div>
-				<div class="trafficLight">
-					
-				<tr>
-					<th>Status (trafik)</th>
-				</tr>
-				<tr> <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
-					<td>Rød</td>
-					<td>Gul</td>
-					<td>Grøn</td>
+					<th colspan="10" class="Name"><h2>@schema.Name</h2></th>
 				</tr>
 				
-				</div>
-				<div class="allMedicineStatuses">
+				
+
+
 				<tr>
-					<th>Medicintid</th>
+					<th colspan="10">Status(trafik)</th>
+				</tr>
+				
+				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
+				<tr>
+				<td class="trafficRed">Rød</td>
+				<td class="trafficYellow">Gul</td>
+				<td class ="trafficGreen">Grøn</td>
+				</tr>
+
+				<tr>
+					<th colspan="10">Medicintider</th>
 	
-			</tr>
+				</tr>
 			@* @if ( ResidentSchemaDto.Id == MedicineStatusDto.ResidentSchemaId)
 			{ *@
-	@foreach (var status in _statuses )
-	{
-					@if (schema.Id == status.ResidentSchemaId)
-					{
-
-	
 		
 				<tr>
-
-					<td>@status.Time</td>
+					@foreach (var status in _statuses)
+					{
+						@if (schema.Id == status.ResidentSchemaId)
+						{
+					<td>
+								<div>
+						@status.Time.ToString("HH:mm")
 					@* <td>15:00</td>
 					<td>17:00</td>
 					<td>17:30</td> *@
-				</tr>
-				<tr>
-					<td> <input type="checkbox" @bind="status.Administered"/> </td>
+
+								</div>
+								<div>
+					<input type="checkbox" @bind="status.Administered"/> 
+					@* <td><input type="checkbox" /></td>
 					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-				</tr>  
+					<td><input type="checkbox" /></td> *@
+								</div>
+							</td>
 		
 					}
 	}
 				
-			
-					</div>
-					<div class="employee">
+			</tr>
+				
+					
 
 				<tr>
-					<th>Personale</th>
+					<th colspan="10">Personale</th>
 				</tr>
 				<tr>
 					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
 
 				</tr>
-				</div>
-				<div class="note">
+				
+				
 				<tr>
-					<th>Note</th>
+					<th colspan="10">Note</th>
 				</tr>
 				<tr>
-					<td>@schema.Note</td>
+					<td colspan="10">@schema.Note</td>
 				</tr>
-				</div>
+				
 			</table>
 		</div>
 	}
