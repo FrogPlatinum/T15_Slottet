@@ -1,0 +1,48 @@
+﻿/*Jeg ved denne css skal være i vores wwwroot, men jeg kunne ikke lige huske hvordan man gjorde :o)*/
+
+/*All Schemas*/
+h1 {
+    font-family: 'Verdana';
+}
+.allSchemas {
+    background-color: cornflowerblue; 
+    max-width: max-content;
+}
+.allSchemas {
+    display: flex;
+    gap: 30px;
+
+}
+.allSchemas {
+    border-radius: 25px;
+    border: 5px;
+    padding: 30px;
+    box-sizing:content-box
+    
+}
+/*Individual Schemas*/
+.individualSchemas {
+    font-family: 'Verdana';
+    background-color: lightblue
+}
+.individualSchemas {
+    border-radius: 25px;
+    border: 2px; 
+    box-shadow: 7px 7px 7px;
+    padding: 20px;
+   
+}
+.individualSchemas {
+    max-width: max-content
+}
+/*Name Section*/
+.residentName {
+background-color: aquamarine
+}
+/*Traffic Light Section*/
+
+/*Medicine Status Section*/
+
+/*Employee Section*/
+
+/*Note Section*/

@@ -4,8 +4,7 @@
 @page "/residentschema"
 
 
-	@foreach (var schema in _schemas)
-	{
+	
 		<!--
 	Step 1
 	Tilføj bokse
@@ -23,12 +22,21 @@
 	Make it pretty
 	-->
 
-	<div class="">
-		<div class="">
+		<h1>Alle Borgerfelter</h1>
+	<div class="allSchemas">
+		
+@foreach (var schema in _schemas)
+{
+<div class="individualSchemas">
+
 			<table>
+				<div class="residentName">
 				<tr>
-					<th>@schema.Name</th>
+					<th><h2>@schema.Name</h2></th>
 				</tr>
+				</div>
+				<div class="trafficLight">
+					
 				<tr>
 					<th>Status (trafik)</th>
 				</tr>
@@ -37,6 +45,9 @@
 					<td>Gul</td>
 					<td>Grøn</td>
 				</tr>
+				
+				</div>
+				<div class="allMedicineStatuses">
 				<tr>
 					<th>Medicintid</th>
 	
@@ -68,7 +79,9 @@
 	}
 				
 			
-			
+					</div>
+					<div class="employee">
+
 				<tr>
 					<th>Personale</th>
 				</tr>
@@ -76,16 +89,19 @@
 					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
 
 				</tr>
+				</div>
+				<div class="note">
 				<tr>
 					<th>Note</th>
 				</tr>
 				<tr>
 					<td>@schema.Note</td>
 				</tr>
+				</div>
 			</table>
 		</div>
-	</div>
 	}
+	</div>
 
 @code {
 	//Resident Schema
