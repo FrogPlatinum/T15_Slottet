@@ -11,8 +11,8 @@ namespace Slottet.Application.Services
 {
     public class ResidentSchemaService : IResidentSchemaService
     {
-        private readonly IResidentSchemaRepo _repo;
-        public ResidentSchemaService(IResidentSchemaRepo repo)
+        private readonly IGenericRepo<ResidentSchema> _repo;
+        public ResidentSchemaService(IGenericRepo<ResidentSchema> repo)
         {
             _repo = repo;
         }

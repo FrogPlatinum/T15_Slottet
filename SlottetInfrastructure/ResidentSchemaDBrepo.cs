@@ -11,9 +11,9 @@ using Slottet.Infrastructure.Data;
 
 namespace Slottet.Infrastructure
 {
-    public class ResidentSchemaDBrepo : IResidentSchemaRepo
+    public class ResidentSchemaDBrepo : IGenericRepo<ResidentSchema>
     {
-        private AppDbContext _databaseRepo;
+        private readonly AppDbContext _databaseRepo;
 
         public ResidentSchemaDBrepo(AppDbContext dbContext)
         {
@@ -44,7 +44,7 @@ namespace Slottet.Infrastructure
                 return await _databaseRepo.ResidentSchemas.ToListAsync();
         }
 
-        public async Task<ResidentSchema> GetByIdAsync(int id)
+        public async Task<ResidentSchema?> GetByIdAsync(int id)
         {
                 return await _databaseRepo.ResidentSchemas.FindAsync(id);
         }

@@ -5,6 +5,8 @@ using Slottet.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Slottet.Application.Interfaces;
 using Slottet.Application.Services;
+using Slottet.Domain.Entity;
+using Slottet.Application.Settings;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +21,18 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IResidentSchemaRepo, ResidentSchemaDBrepo>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("UserDbConnection")));
+
+//DI
+builder.Services.AddScoped<IGenericRepo<ResidentSchema>, ResidentSchemaDBrepo>();
+builder.Services.AddScoped<IGenericRepo<User>, UserDbRepo>();
 builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+//JWT
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();
 

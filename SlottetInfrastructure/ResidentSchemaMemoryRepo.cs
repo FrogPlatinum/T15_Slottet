@@ -4,7 +4,7 @@ using Slottet.Domain.Enums;
 
 namespace Slottet.Infrastructure
 {
-    public class ResidentSchemaMemoryRepo : IResidentSchemaRepo
+    public class ResidentSchemaMemoryRepo : IGenericRepo<ResidentSchema>
     {
         private static List<ResidentSchema> _schemas = new List<ResidentSchema>
         {
