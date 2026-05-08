@@ -22,6 +22,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddScoped<IResidentSchemaRepo, ResidentSchemaDBrepo>();
 builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
 
+builder.Services.AddScoped<IMedicineStatusRepo, MedicineStatusDBRepo>();
+builder.Services.AddScoped<IMedicineStatusService, MedicineStatusService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
