@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
@@ -33,6 +34,7 @@ namespace Slottet.Application.Services
 
             return new ResidentSchemaDto
             {
+                Id = dto.Id,
                 Name = dto.Name,
                 TrafficLight = dto.TrafficLight,
                 Employee = dto.Employee,
@@ -82,23 +84,51 @@ namespace Slottet.Application.Services
         //To do
         public async Task<ResidentSchemaDto> UpdateResidentSchemaAsync(ResidentSchemaDto dto)
         {
-            var entity = new ResidentSchema
+            //var entity = new ResidentSchema
+            //{
+            //    Name = dto.Name,
+            //    TrafficLight = dto.TrafficLight,
+            //    Employee = dto.Employee,
+            //    Note = dto.Note,
+            //};
+            //await _repo.UpdateAsync(entity);
+
+            //return new ResidentSchemaDto
+            //{
+            //    Name = dto.Name,
+            //    TrafficLight = dto.TrafficLight,
+            //    Employee = dto.Employee,
+            //    Note = dto.Note,
+            //};
+
+            var schema = await _repo.GetByIdAsync(dto.Id);
+
+            if (schema == null)
             {
-                Name = dto.Name,
-                TrafficLight = dto.TrafficLight,
-                Employee = dto.Employee,
-                Note = dto.Note,
-            };
-            await _repo.UpdateAsync(entity);
+                throw new KeyNotFoundException("fandt ikke borger");
+
+            }
+
+                    
+                    schema.Name = dto.Name;
+                    schema.TrafficLight = dto.TrafficLight;
+                    schema.Employee = dto.Employee;
+                    schema.Note = dto.Note;
+
+                    await _repo.UpdateAsync(schema);
 
             return new ResidentSchemaDto
             {
+                Id = dto.Id,
                 Name = dto.Name,
                 TrafficLight = dto.TrafficLight,
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
+                
+            
 
+                
         }
     }
 }
