@@ -23,16 +23,16 @@ namespace Slottet.Application.Services
         }
         public string GenerateToken(User user)
         {
-            var keyBytes = Encoding.UTF8.GetBytes(_jwt.Key);
+            var key = Encoding.UTF8.GetBytes(_jwt.Key);
 
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                
+                new Claim(ClaimTypes.Role, user.Role),               
             };
 
             var creds = new SigningCredentials(
-                new SymmetricSecurityKey(keyBytes),
+                new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature);
 
             var token = new JwtSecurityToken(

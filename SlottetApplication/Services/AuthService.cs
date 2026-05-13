@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Shared.DTOs;
@@ -16,14 +17,14 @@ namespace Slottet.Application.Services
         {
             _repo = repo;
         }
-        public Task<string> LoginAsync(UserDto dto)
+        public async Task<string> LoginAsync(UserDto dto)
         {
             throw new NotImplementedException();
         }
 
         public async Task<User?> RegisterAsync(UserDto dto)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Slottet.Infrastructure
 
         public async Task UpdateAsync(ResidentSchema entity)
         {
-            var schemaUpdate = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
+            //var schemaUpdate = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
             //if (schemaUpdate != null)
             //{
             //    schemaUpdate.Name = entity.Name;
@@ -60,8 +60,8 @@ namespace Slottet.Infrastructure
             //    schemaUpdate.Employee = entity.Employee;
             //    schemaUpdate.Note = entity.Note;
             //}
-            _databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
-            //_databaseRepo.ResidentSchemas.Update(entity);
+            //_databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
+            _databaseRepo.ResidentSchemas.Update(entity);
             await _databaseRepo.SaveChangesAsync(); 
             return;
 
