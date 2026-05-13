@@ -102,21 +102,22 @@
 				
 			</table>
 		</div>
-		<button class="addSchemaButton"> Tilføj Borgerfelt </button>
+		<button class="addSchemaButton" @onclick="AddNewSchema"> Tilføj Borgerfelt </button>
 	}
 	</div>
 
 @code {
 	//Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
-	
+
 	public async Task GetAllResidentSchemas()
 	{
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
 
+
 	//Medicine Status
-	
+
 	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
 
 	public async Task GetAllMedicineStatuses()
@@ -131,6 +132,10 @@
 		await GetAllMedicineStatuses();
 	}
 
-
+	//Add empty residentSchema
+	private void AddNewSchema(MouseEventArgs args)
+	{
+	//Not sure what to put here aaaaand I think we might need some services for it? (like Gavin said xD)
+	}
 
 }
