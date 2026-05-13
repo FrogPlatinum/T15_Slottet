@@ -41,6 +41,7 @@ namespace Slottet.API.Controllers
         [HttpPut("{id}")] //To do
         public async Task<IActionResult> UpdateAsync(int id, ResidentSchemaDto entity)
         {
+            entity.Id = id;
             await _residentSchemaRepo.UpdateResidentSchemaAsync(entity);
             return Ok();
         }
