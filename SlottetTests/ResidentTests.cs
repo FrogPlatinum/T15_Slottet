@@ -34,10 +34,6 @@ namespace SlottetTests
                 id: 2,
                 name: "Karl Karlson",
                 trafficLight: TrafficLightStatus.Yellow,
-                medicineStatuses: new List<MedicineStatus>
-                {
-                    new MedicineStatus { Id = 2, Time = DateTime.Now, Administered = true }
-                },
                 employee: "Hans Hansen",
                 note: "Ny borger"
                 );
@@ -50,7 +46,6 @@ namespace SlottetTests
             Assert.AreEqual(2, createdResidentSchema.Id);
             Assert.AreEqual("Karl Karlson", createdResidentSchema.Name);
             Assert.AreEqual(TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
-            Assert.IsNotNull(createdResidentSchema.MedicineStatuses);
             Assert.AreEqual("Hans Hansen", createdResidentSchema.Employee);
             Assert.AreEqual("Ny borger", createdResidentSchema.Note);
             //Find ud af teste nested classes, er medicinstatus id korrekt?
@@ -63,10 +58,6 @@ namespace SlottetTests
               id: 600,
               name: "Karl Karlson",
               trafficLight: TrafficLightStatus.Yellow,
-              medicineStatuses: new List<MedicineStatus>
-              {
-                    new MedicineStatus { Id = 300, Time = DateTime.Now, Administered = true }
-              },
               employee: "Hans Hansen",
               note: "Ny borger"
               );
@@ -77,10 +68,6 @@ namespace SlottetTests
             id: 600,
             name: "Niels Hansen Updated",
             trafficLight: TrafficLightStatus.Red,
-            medicineStatuses: new List<MedicineStatus>
-            {
-            new MedicineStatus { Id = 300, Time = DateTime.Now, Administered = true }
-             },
             employee: "Test Employee",
             note: "Opdateret note"
     );
@@ -94,7 +81,6 @@ namespace SlottetTests
             Assert.AreEqual(600, updatedResidentSchema.Id);
             Assert.AreEqual("Niels Hansen Updated", updatedResidentSchema.Name);
             Assert.AreEqual(TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
-            Assert.IsNotNull(updatedResidentSchema.MedicineStatuses);
             Assert.AreEqual("Test Employee", updatedResidentSchema.Employee);
             Assert.AreEqual("Opdateret note", updatedResidentSchema.Note);
         }
@@ -108,10 +94,6 @@ namespace SlottetTests
               id: 700,
               name: "Karl Karlson",
               trafficLight: TrafficLightStatus.Yellow,
-              medicineStatuses: new List<MedicineStatus>
-              {
-                    new MedicineStatus { Id = 200, Time = DateTime.Now, Administered = true }
-              },
               employee: "Hans Hansen",
               note: "Ny borger"
               );

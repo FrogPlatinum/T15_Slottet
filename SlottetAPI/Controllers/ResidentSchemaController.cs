@@ -22,6 +22,8 @@ namespace Slottet.API.Controllers
             return Ok(residents);
         }
 
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -30,20 +32,17 @@ namespace Slottet.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(CreateResidentSchemaDto residentSchema)
+        public async Task<IActionResult> AddAsync(ResidentSchemaDto residentSchema)
         {
             await _residentSchemaRepo.AddResidentSchemaAsync(residentSchema);
             return Ok();
         }
 
         [HttpPut("{id}")] //To do
-        public async Task<IActionResult> UpdateAsync(int id, UpdateResidentSchemaDto entity)
+        public async Task<IActionResult> UpdateAsync(int id, ResidentSchemaDto entity)
         {
-            //if(id != entity.Id) return BadRequest("Inkorrekt id");
-            //    await _residentSchemaRepo.UpdateAsync(entity);
-            //return Ok(entity);
-
-            throw new NotImplementedException();
+            await _residentSchemaRepo.UpdateResidentSchemaAsync(entity);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

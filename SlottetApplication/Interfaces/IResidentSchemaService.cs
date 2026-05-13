@@ -12,8 +12,8 @@ namespace Slottet.Application.Interfaces
     {
         Task<ResidentSchemaDto> GetResidentSchemaByIdAsync(int id);
         Task<ResidentSchemaDto[]> GetAllResidentSchemasAsync();
-        Task<ResidentSchemaDto> AddResidentSchemaAsync(CreateResidentSchemaDto dto);
-        Task UpdateResidentSchemaAsync(UpdateResidentSchemaDto dto);
+        Task<ResidentSchemaDto> AddResidentSchemaAsync(ResidentSchemaDto dto);
+        Task<ResidentSchemaDto> UpdateResidentSchemaAsync(ResidentSchemaDto dto);
         Task DeleteResidentSchemaAsync(int id);
     }
 }

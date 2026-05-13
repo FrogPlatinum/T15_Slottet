@@ -13,7 +13,6 @@ namespace Slottet.Shared.DTOs.ResidentSchema
         public int Id { get; set; }
         public string Name { get; set; }
         public TrafficLightStatus TrafficLight { get; set; }
-        public List<MedicineStatus> MedicineStatuses { get; set; }
         public string? Employee { get; set; }
         public string? Note { get; set; }
     }

@@ -44,26 +44,29 @@ namespace Slottet.Infrastructure
                 return await _databaseRepo.ResidentSchemas.ToListAsync();
         }
 
-        public async Task<ResidentSchema> GetByIdAsync(int id)
+        public async Task<ResidentSchema?> GetByIdAsync(int id)
         {
                 return await _databaseRepo.ResidentSchemas.FindAsync(id);
         }
 
         public async Task UpdateAsync(ResidentSchema entity)
         {
-            var schemaUpdate = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
+            //var schemaUpdate = await _databaseRepo.ResidentSchemas.FindAsync(entity.Id);
             //if (schemaUpdate != null)
             //{
             //    schemaUpdate.Name = entity.Name;
             //    schemaUpdate.TrafficLight = entity.TrafficLight;
-            //    schemaUpdate.MedicineStatuses = entity.MedicineStatuses;
             //    schemaUpdate.Employee = entity.Employee;
             //    schemaUpdate.Note = entity.Note;
             //}
-            _databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
-            //_databaseRepo.ResidentSchemas.Update(entity);
-            await _databaseRepo.SaveChangesAsync(); 
-            return;
+            //_databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
+            ////_databaseRepo.ResidentSchemas.Update(entity);
+            //await _databaseRepo.SaveChangesAsync(); 
+            //return;
+
+            _databaseRepo.ResidentSchemas.Update(entity);
+            await _databaseRepo.SaveChangesAsync();
+
 
         }
     }

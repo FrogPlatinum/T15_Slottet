@@ -1,10 +1,10 @@
 ﻿@using Slottet.Shared.DTOs.ResidentSchema
+@using Slottet.Shared.DTOs.MedicinStatus
 @inject HttpClient Http
 @page "/residentschema"
 
 
-	@foreach (var schema in _schemas)
-	{
+	
 		<!--
 	Step 1
 	Tilføj bokse
@@ -22,64 +22,114 @@
 	Make it pretty
 	-->
 
-	<div class="">
-		<div class="">
-			<table>
+		<h1>Alle Borgerfelter</h1>
+	<div class="allSchemas">
+		
+@foreach (var schema in _schemas)
+{
+<div class="individualSchemas">
+
+			<table style="width:100%">
+				
 				<tr>
-					<th>@schema.Name</th>
+					<th colspan="10" class="Name"><h2>@schema.Name</h2></th>
 				</tr>
+				
+				
+
+
 				<tr>
-					<th>Status (trafik)</th>
+					<th colspan="10">Status(trafik)</th>
 				</tr>
-				<tr> <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
-					<td>Rød</td>
-					<td>Gul</td>
-					<td>Grøn</td>
-				</tr>
+				
+				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
 				<tr>
-					<th>Medicintid</th>
+				<td class="trafficRed">Rød</td>
+				<td class="trafficYellow">Gul</td>
+				<td class ="trafficGreen">Grøn</td>
 				</tr>
+
 				<tr>
-					<td>12:00</td>
-					<td>15:00</td>
+					<th colspan="10">Medicintider</th>
+	
+				</tr>
+			@* @if ( ResidentSchemaDto.Id == MedicineStatusDto.ResidentSchemaId)
+			{ *@
+		
+				<tr>
+					@foreach (var status in _statuses)
+					{
+						@if (schema.Id == status.ResidentSchemaId)
+						{
+					<td>
+								<div>
+						@status.Time.ToString("HH:mm")
+					@* <td>15:00</td>
 					<td>17:00</td>
-					<td>17:30</td>
-				</tr>
+					<td>17:30</td> *@
+
+								</div>
+								<div>
+					<input type="checkbox" @bind="status.Administered"/> 
+					@* <td><input type="checkbox" /></td>
+					<td><input type="checkbox" /></td>
+					<td><input type="checkbox" /></td> *@
+								</div>
+							</td>
+		
+					}
+	}
+				
+			</tr>
+				
+					
+
 				<tr>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-				</tr>
-				<tr>
-					<th>Personale</th>
+					<th colspan="10">Personale</th>
 				</tr>
 				<tr>
 					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
 
 				</tr>
+				
+				
 				<tr>
-					<th>Note</th>
+					<th colspan="10">Note</th>
 				</tr>
 				<tr>
-					<td>@schema.Note</td>
+					<td colspan="10">@schema.Note</td>
 				</tr>
+				
 			</table>
 		</div>
-	</div>
 	}
+	</div>
 
 @code {
-
+	//Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
-
-	protected override async Task OnInitializedAsync()
-	{
-		await GetAllResidentSchemas();
-	}
-
+	
 	public async Task GetAllResidentSchemas()
 	{
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
+
+	//Medicine Status
+	
+	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
+
+	public async Task GetAllMedicineStatuses()
+	{
+		_statuses = await Http.GetFromJsonAsync<MedicineStatusDto[]>("api/MedicineStatus/allstatuses") ?? Array.Empty<MedicineStatusDto>();
+	}
+
+	//All together :)
+	protected override async Task OnInitializedAsync()
+	{
+		await GetAllResidentSchemas();
+		await GetAllMedicineStatuses();
+	}
+
+
+
 }

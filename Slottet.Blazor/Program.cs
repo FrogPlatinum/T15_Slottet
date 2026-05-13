@@ -1,5 +1,5 @@
 using Slottet.Blazor.Components;
-using Slottet.Blazor.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
