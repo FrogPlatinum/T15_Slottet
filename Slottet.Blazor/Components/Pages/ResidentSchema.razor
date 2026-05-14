@@ -31,13 +31,15 @@
 
 			<table style="width:100%">
 				
+				@* Resident "Name" *@
+				
 				<tr>
 					<th colspan="10" class="Name"><h2>@schema.Name</h2></th>
 				</tr>
 				
 				
 
-
+				@* Traffic Light *@
 				<tr>
 					<th colspan="10">Status(trafik)</th>
 				</tr>
@@ -49,12 +51,11 @@
 				<td class ="trafficGreen">Grøn</td>
 				</tr>
 
+				@* Medicine Status *@
 				<tr>
 					<th colspan="10">Medicintider</th>
 	
 				</tr>
-			@* @if ( ResidentSchemaDto.Id == MedicineStatusDto.ResidentSchemaId)
-			{ *@
 		
 				<tr>
 					@foreach (var status in _statuses)
@@ -64,16 +65,12 @@
 					<td>
 								<div>
 						@status.Time.ToString("HH:mm")
-					@* <td>15:00</td>
-					<td>17:00</td>
-					<td>17:30</td> *@
+					
 
 								</div>
 								<div>
 					<input type="checkbox" @bind="status.Administered"/> 
-					@* <td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td> *@
+					
 								</div>
 							</td>
 		
@@ -81,8 +78,8 @@
 	}
 				
 			</tr>
-				
-					
+
+				@* Employees *@	
 
 				<tr>
 					<th colspan="10">Personale</th>
@@ -91,7 +88,7 @@
 					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
 
 				</tr>
-				
+				@* Notes *@	
 				
 				<tr>
 					<th colspan="10">Note</th>
@@ -102,6 +99,81 @@
 				
 			</table>
 		</div>
+		
+		<div class="individualSchemas">
+
+			<table style="width:100%">
+				
+				@* Resident "Name" *@
+				
+				<tr>
+					<th colspan="10" class="Name"><h2>Tomt</h2></th>
+				</tr>
+				
+				
+
+				@* Traffic Light *@
+				<tr>
+					<th colspan="10">Status(trafik)</th>
+				</tr>
+				
+				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
+				<tr>
+				<td class="trafficRed">Rød</td>
+				<td class="trafficYellow">Gul</td>
+				<td class ="trafficGreen">Grøn</td>
+				</tr>
+
+				@* Medicine Status *@
+				<tr>
+					<th colspan="10">Medicintider</th>
+	
+				</tr>
+		
+				<tr>
+					@foreach (var status in _statuses)
+					{
+						@if (schema.Id == status.ResidentSchemaId)
+						{
+					<td>
+								<div>
+						@status.Time.ToString("HH:mm")
+					
+
+								</div>
+								<div>
+					<input type="checkbox" @bind="status.Administered"/> 
+					
+								</div>
+							</td>
+		
+					}
+	}
+				
+			</tr>
+
+				@* Employees *@	
+
+				<tr>
+					<th colspan="10">Personale</th>
+				</tr>
+				<tr>
+					<td>Tom</td> <!-- 2 medarbejdere-->
+
+				</tr>
+				@* Notes *@	
+				
+				<tr>
+					<th colspan="10">Note</th>
+				</tr>
+				<tr>
+					<td colspan="10">Skriv note her</td>
+				</tr>
+				
+			</table>
+		</div>
+
+		@* Add Button *@	
 		<button class="addSchemaButton" @onclick="AddNewSchema"> Tilføj Borgerfelt </button>
 	}
 	</div>
@@ -132,10 +204,22 @@
 		await GetAllMedicineStatuses();
 	}
 
+	private ResidentSchemaDto newSchema = new();
+	private List<ResidentSchemaDto> schemas = new();
 	//Add empty residentSchema
-	private void AddNewSchema(MouseEventArgs args)
+	public async Task CreateAsync()
 	{
-	//Not sure what to put here aaaaand I think we might need some services for it? (like Gavin said xD)
+		
+		var response = await Http.PostAsJsonAsync("api/ResidentSchema/AddAsync", newSchema);
+		var createdSchema = await response.Content.ReadFromJsonAsync<ResidentSchemaDto>();
+		schemas.Add(createdSchema);
+
+	}
+
+	
+	private async Task AddNewSchema(MouseEventArgs args)
+	{
+		await CreateAsync();
 	}
 
 }

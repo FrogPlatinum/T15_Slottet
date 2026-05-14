@@ -31,7 +31,7 @@ namespace Slottet.API.Controllers
             return Ok(resident);
         }
 
-        [HttpPost]
+        [HttpPost("AddAsync")]
         public async Task<IActionResult> AddAsync(ResidentSchemaDto residentSchema)
         {
             await _residentSchemaRepo.AddResidentSchemaAsync(residentSchema);
