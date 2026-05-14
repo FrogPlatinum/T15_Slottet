@@ -1,4 +1,6 @@
-﻿
+﻿body {
+	font-family: 'Verdana';
+}
 .registerForm {
 	font-family: 'Verdana';
 	background-color: lightblue;
@@ -6,10 +8,9 @@
 }
 
 .registerForm {
-	border-top-left-radius: 25px;
-	border-radius: 25px;
+	border-radius: 15px;
 	border: 2px;
-	box-shadow: 7px 7px 7px;
+	/*box-shadow: 3px 3px 3px;*/
 	padding: 10px;
 }
 
@@ -19,14 +20,15 @@
 
 .registerButton {
 	background-color: aliceblue;
-	border-radius: 25px;
+	border-radius: 15px;
 	border: 10px;
 	padding: 10px;
-	box-shadow: 7px 7px 7px;
+	/*box-shadow: 2px 2px 2px;*/
 	align-self: flex-start;
 	width: auto;
 	align-self: center;
 	font-weight: bold;
+	font-size: 14px;
 }
 
 .registerButton:hover {

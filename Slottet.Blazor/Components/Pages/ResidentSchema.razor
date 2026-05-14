@@ -46,9 +46,18 @@
 				
 				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
 				<tr>
-				<td class="trafficRed">Rød</td>
-				<td class="trafficYellow">Gul</td>
-				<td class ="trafficGreen">Grøn</td>
+				<td class="trafficred">rød</td>
+				<td class="trafficyellow">gul</td>
+				<td class ="trafficgreen">grøn</td>
+
+					@* <InputSelect @bind-Value="@schema.TrafficLight">
+
+						@foreach (var trafficLight in Enum.GetValues(typeof(ResidentSchemaDto.TrafficLightStatus.TrafficLight)))
+						{
+
+							<option value="@trafficLight">@trafficLight</option>
+						}
+					</InputSelect> *@
 				</tr>
 
 				@* Medicine Status *@
@@ -99,7 +108,7 @@
 				
 			</table>
 		</div>
-		
+	}
 		<div class="individualSchemas">
 
 			<table style="width:100%">
@@ -131,7 +140,8 @@
 				</tr>
 		
 				<tr>
-					@foreach (var status in _statuses)
+					<td>tid</td>
+					@* @foreach (var status in _statuses)
 					{
 						@if (schema.Id == status.ResidentSchemaId)
 						{
@@ -148,7 +158,7 @@
 							</td>
 		
 					}
-	}
+	} *@
 				
 			</tr>
 
@@ -175,7 +185,7 @@
 
 		@* Add Button *@	
 		<button class="addSchemaButton" @onclick="AddNewSchema"> Tilføj Borgerfelt </button>
-	}
+	
 	</div>
 
 @code {

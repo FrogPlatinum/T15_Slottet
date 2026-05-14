@@ -2,8 +2,9 @@
 
 /*All Schemas*/
 .allSchemas {
-    background-color: steelblue; 
+    background-color: steelblue;
     max-width: max-content;
+    font-family: 'Verdana';
 }
 .allSchemas {
     display: flex;
@@ -11,7 +12,7 @@
 
 }
 .allSchemas {
-    border-radius: 25px;
+    border-radius: 20px;
     border: 5px;
     padding: 30px;
     box-sizing:content-box;
@@ -19,20 +20,15 @@
 }
 /*Individual Schemas*/
 .individualSchemas {
-    font-family: 'Verdana';
     background-color: aliceblue;
-}
-.individualSchemas {
-    border-top-left-radius: 25px;
-    border-radius: 25px;
+    border-top-left-radius: 7px;
+    border-radius: 7px;
     border: 2px;
-    box-shadow: 7px 7px 7px;
+    box-shadow: 5px 5px 5px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-/*.individualSchemas {
-    max-width: max-content
-}*/
+
 
 /*Table formatting*/
 td {
@@ -48,9 +44,7 @@ tr {
     text-align: center;
     padding: 5px;
 }
-h1 {
-    font-family: 'Verdana';
-}
+
 .Name {
     background-color: transparent;
 }
@@ -69,10 +63,10 @@ h1 {
 /*Buttons*/
 .addSchemaButton {
     background-color: aliceblue;
-    border-radius: 25px;
+    border-radius: 10px;
     border: 10px;
     padding: 10px;
-    box-shadow: 7px 7px 7px;
+    /*box-shadow: 7px 7px 7px;*/
     align-self: flex-start;
     width: auto;
     align-self:center;
