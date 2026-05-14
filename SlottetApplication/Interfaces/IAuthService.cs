@@ -10,7 +10,7 @@ namespace Slottet.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task<User?> RegisterAsync(UserDto dto);
-        Task<string> LoginAsync(UserDto dto);
+        Task<User?> RegisterAsync(UserDto request);
+        Task<string?> LoginAsync(UserDto request);
     }
 }

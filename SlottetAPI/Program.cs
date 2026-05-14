@@ -29,6 +29,7 @@ builder.Services.AddScoped<IGenericRepo<ResidentSchema>, ResidentSchemaDBrepo>()
 builder.Services.AddScoped<IGenericRepo<User>, UserDbRepo>();
 builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 //JWT
 builder.Services.Configure<JwtSettings>(
