@@ -10,7 +10,7 @@ using Slottet.Infrastructure.Data;
 
 namespace Slottet.Infrastructure
 {
-    public class UserDbRepo : IGenericRepo<User>
+    public class UserDbRepo : IUserRepo
     {
         private readonly UserDbContext _repo;
         public UserDbRepo(UserDbContext context)
@@ -43,6 +43,11 @@ namespace Slottet.Infrastructure
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _repo.Users.FindAsync(id);
+        }
+
+        public Task<User?> GetByUserName(string name)
+        {
+            return _repo.Users.FirstOrDefaultAsync(u => u.Username == name);
         }
 
         public async Task UpdateAsync(User entity)

@@ -13,19 +13,20 @@ namespace Slottet.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IGenericRepo<User> _repo;
+        private readonly IUserRepo _repo;
         private readonly IConfiguration _config;
         private readonly ITokenService _tokenService;
 
-        public AuthService(IGenericRepo<User> repo, IConfiguration config, ITokenService tokenService)
+        
+        public AuthService(IUserRepo repo, IConfiguration config, ITokenService tokenService)
         {
             _repo = repo;
-            _config = config;
+            _config = config; //unsure if necessary - Gavin
             _tokenService = tokenService;
         }
         public async Task<string?> LoginAsync(UserDto request)
         {
-            var user = await _repo.GetByIdAsync(request.Id);
+            var user = await _repo.GetByUserName(request.Username);
             if (user == null)
             {
                 return null;
@@ -41,9 +42,9 @@ namespace Slottet.Application.Services
 
         public async Task<User?> RegisterAsync(UserDto request)
         {
-            //Refactor this into a repo method, if we have more time. Pulling the entire table is no good.. --Gavin
-            var existing = (await _repo.GetAllAsync()).Any(u => u.Username == request.Username);
-            if (existing) { return null; }
+            
+            var existing = await _repo.GetByUserName(request.Username);
+            if (existing != null) { return null; }
 
             var user = new User();
             var hashedPassword = new PasswordHasher<User>()
@@ -51,9 +52,15 @@ namespace Slottet.Application.Services
 
             user.Username = request.Username;
             user.PasswordHash = hashedPassword;
+            user.Role = request.Role;
 
             await _repo.AddAsync(user);
             return user;
+        }
+
+        public async Task RemoveUserAsync(int id)
+        {
+           await _repo.DeleteAsync(id);
         }
     }
 }

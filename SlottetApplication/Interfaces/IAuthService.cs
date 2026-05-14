@@ -12,5 +12,6 @@ namespace Slottet.Application.Interfaces
     {
         Task<User?> RegisterAsync(UserDto request);
         Task<string?> LoginAsync(UserDto request);
+        Task RemoveUserAsync(int id);
     }
 }

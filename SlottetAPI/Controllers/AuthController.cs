@@ -33,5 +33,12 @@ namespace Slottet.API.Controllers
             }
             return Ok(token);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> RemoveUser(int id)
+        {
+            await authService.RemoveUserAsync(id);
+            return Ok("Bruger slettet");
+        }
     }
 }

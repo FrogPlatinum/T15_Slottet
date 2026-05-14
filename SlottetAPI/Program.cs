@@ -26,7 +26,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("UserDbConnection
 
 //DI
 builder.Services.AddScoped<IGenericRepo<ResidentSchema>, ResidentSchemaDBrepo>();
-builder.Services.AddScoped<IGenericRepo<User>, UserDbRepo>();
+builder.Services.AddScoped<IUserRepo, UserDbRepo>();
 builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
