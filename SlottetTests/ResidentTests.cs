@@ -55,7 +55,7 @@ namespace SlottetTests
         {
             //Arrange: Setup resident schema and update it
             var newResidentSchema = new ResidentSchema(
-              id: 600,
+              id: 650,
               name: "Karl Karlson",
               trafficLight: TrafficLightStatus.Yellow,
               employee: "Hans Hansen",
@@ -64,13 +64,12 @@ namespace SlottetTests
 
             await _residentDBRepo.AddAsync(newResidentSchema);
 
-            var updatedResidentSchema = new ResidentSchema(
-            id: 600,
-            name: "Niels Hansen Updated",
-            trafficLight: TrafficLightStatus.Red,
-            employee: "Test Employee",
-            note: "Opdateret note"
-    );
+            var updatedResidentSchema = await _residentDBRepo.GetByIdAsync(650);
+
+            updatedResidentSchema.Name = "Niels Hansen Updated";
+            updatedResidentSchema.TrafficLight = TrafficLightStatus.Red;
+            updatedResidentSchema.Employee = "Test Employee";
+            updatedResidentSchema.Note = "Opdateret note";
 
             //Act
 
@@ -78,7 +77,7 @@ namespace SlottetTests
 
             //Assert
             Assert.IsNotNull(updatedResidentSchema);
-            Assert.AreEqual(600, updatedResidentSchema.Id);
+            Assert.AreEqual(650, updatedResidentSchema.Id);
             Assert.AreEqual("Niels Hansen Updated", updatedResidentSchema.Name);
             Assert.AreEqual(TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
             Assert.AreEqual("Test Employee", updatedResidentSchema.Employee);
