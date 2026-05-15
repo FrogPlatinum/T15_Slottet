@@ -41,26 +41,47 @@
 
 				@* Traffic Light *@
 				<tr>
-					<th colspan="10">Status(trafik)</th>
+					<th colspan="10">Trafiklys</th>
 				</tr>
 				
 				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
 				<tr>
-				<td class="trafficred">rød</td>
-				<td class="trafficyellow">gul</td>
-				<td class ="trafficgreen">grøn</td>
 
-					@* <InputSelect @bind-Value="@schema.TrafficLight">
+					<td>@schema.TrafficLight</td>
 
-						@foreach (var trafficLight in Enum.GetValues(typeof(ResidentSchemaDto.TrafficLightStatus.TrafficLight)))
+				@* 	@switch (ActiveColor)
+					{
+					case 1:
+
+					ActiveColor =Grøn;
+
+
+					break;
+					case 2:
+							ActiveColor = Grøn;
+
+					break;
+					case "3":
+
+							ActiveColor = schema.TrafficLight.Grøn;
+
+					break;
+
+		}
+						 *@
+				<td>
+					<InputSelect @bind-Value="@schema.TrafficLight" class="trafficLightPicker">
+
+						@foreach (var trafficLight in Enum.GetValues(typeof(ResidentSchemaDto.TrafficLightStatus)))
 						{
 
 							<option value="@trafficLight">@trafficLight</option>
 						}
-					</InputSelect> *@
+					</InputSelect>
+					</td>
 				</tr>
 
-				@* Medicine Status *@
+			
 				<tr>
 					<th colspan="10">Medicintider</th>
 	
@@ -88,7 +109,7 @@
 				
 			</tr>
 
-				@* Employees *@	
+				@* Employees	
 
 				<tr>
 					<th colspan="10">Personale</th>
@@ -188,6 +209,8 @@
 	
 	</div>
 
+
+
 @code {
 	//Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
@@ -219,17 +242,23 @@
 	//Add empty residentSchema
 	public async Task CreateAsync()
 	{
-		
+
 		var response = await Http.PostAsJsonAsync("api/ResidentSchema/AddAsync", newSchema);
 		var createdSchema = await response.Content.ReadFromJsonAsync<ResidentSchemaDto>();
 		schemas.Add(createdSchema);
 
 	}
 
-	
+
 	private async Task AddNewSchema(MouseEventArgs args)
 	{
 		await CreateAsync();
 	}
+	public bool IsActive { get; set; }
 
-}
+	public string ActiveColor { get; set; }
+	private async Task ChangeActiveLight (MouseEventArgs args)
+	{
+		
+	}
+	}

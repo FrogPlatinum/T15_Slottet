@@ -30,6 +30,6 @@ namespace Slottet.Domain.Entity
         {
             
         }
-
+       
     }
 }

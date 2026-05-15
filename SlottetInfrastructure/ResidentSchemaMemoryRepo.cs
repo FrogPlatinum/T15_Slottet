@@ -11,21 +11,21 @@ namespace Slottet.Infrastructure
             new ResidentSchema(
             id:1,
             name: "Niels Hansen",
-            trafficLight: TrafficLightStatus.Green,
+            trafficLight: TrafficLightStatus.Grøn,
             employee: "Lone Nielsen",
             note: "Morgenmedicin givet kl. 10:23"),
 
             new ResidentSchema(
             id:2,
             name: "Mette Jensen",
-            trafficLight: TrafficLightStatus.Red,
+            trafficLight: TrafficLightStatus.Rød,
             employee: "Lone Nielsen",
             note: "Aftensmertestillende mangler - ring til familie"),
 
             new ResidentSchema(
             id:3,
             name: "Hans Pedersen",
-            trafficLight: TrafficLightStatus.Yellow,
+            trafficLight: TrafficLightStatus.Gul,
             employee: "Anne Sørensen",
             note: "Blodtrykspille givet 1,5 time for sent")
         };

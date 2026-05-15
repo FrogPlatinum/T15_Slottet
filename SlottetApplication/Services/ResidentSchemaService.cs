@@ -26,7 +26,7 @@ namespace Slottet.Application.Services
             var entity = new ResidentSchema
             {
                 Name = dto.Name,
-                TrafficLight = dto.TrafficLight,
+                TrafficLight = (Domain.Enums.TrafficLightStatus)dto.TrafficLight,
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
@@ -59,7 +59,7 @@ namespace Slottet.Application.Services
                 {
                     Id = entity.Id,
                     Name = entity.Name,
-                    TrafficLight = entity.TrafficLight,
+                    TrafficLight = (ResidentSchemaDto.TrafficLightStatus)entity.TrafficLight,
                     Employee = entity.Employee,
                     Note = entity.Note,
                 });
@@ -76,7 +76,7 @@ namespace Slottet.Application.Services
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                TrafficLight = entity.TrafficLight,
+                TrafficLight = (ResidentSchemaDto.TrafficLightStatus)entity.TrafficLight,
                 Employee = entity.Employee,
                 Note = entity.Note,
             };
@@ -111,7 +111,7 @@ namespace Slottet.Application.Services
 
                     
                     schema.Name = dto.Name;
-                    schema.TrafficLight = dto.TrafficLight;
+                    schema.TrafficLight = (Domain.Enums.TrafficLightStatus)dto.TrafficLight;
                     schema.Employee = dto.Employee;
                     schema.Note = dto.Note;
 
