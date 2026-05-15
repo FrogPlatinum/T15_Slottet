@@ -30,13 +30,14 @@ builder.Services.AddScoped<IUserRepo, UserDbRepo>();
 builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IGenericRepo<MedicineStatus>, MedicineStatusDBRepo>();
+builder.Services.AddScoped<IMedicineStatusService, MedicineStatusService>();
 
 //JWT
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("Jwt"));
 
-builder.Services.AddScoped<IMedicineStatusRepo, MedicineStatusDBRepo>();
-builder.Services.AddScoped<IMedicineStatusService, MedicineStatusService>();
+
 
 var app = builder.Build();
 

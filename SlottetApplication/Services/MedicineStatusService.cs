@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Shared.DTOs.MedicinStatus;
-using Slottet.Shared.DTOs.ResidentSchema;
 
 namespace Slottet.Application.Services
 {
     public class MedicineStatusService : IMedicineStatusService
     {
-        private readonly IMedicineStatusRepo _repo;
-        public MedicineStatusService(IMedicineStatusRepo repo)
+        private readonly IGenericRepo<MedicineStatus> _repo;
+        public MedicineStatusService(IGenericRepo<MedicineStatus> repo)
         {
             _repo = repo;
         }
@@ -74,9 +73,30 @@ namespace Slottet.Application.Services
             };
         }
         //To do
-        public async Task UpdateMedicineStatusAsync(MedicineStatusDto dto)
+        public async Task<MedicineStatusDto> UpdateMedicineStatusAsync(MedicineStatusDto dto)
         {
-            throw new NotImplementedException();
+            var status = await _repo.GetByIdAsync(dto.Id);
+
+            if (status == null)
+            {
+                throw new KeyNotFoundException("fandt ikke borger");
+
+            }
+
+
+            status.Time = dto.Time;
+            status.Administered = dto.Administered;
+            status.ResidentSchemaId = dto.ResidentSchemaId;
+
+            await _repo.UpdateAsync(status);
+
+            return new MedicineStatusDto
+            {
+                Id = dto.Id,
+                Time = dto.Time,
+                Administered = dto.Administered,
+                ResidentSchemaId = dto.ResidentSchemaId,
+            };
         }
     }
 }

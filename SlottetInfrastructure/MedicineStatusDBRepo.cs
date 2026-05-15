@@ -10,7 +10,7 @@ using Slottet.Infrastructure.Data;
 
 namespace Slottet.Infrastructure
 {
-    public class MedicineStatusDBRepo : IMedicineStatusRepo
+    public class MedicineStatusDBRepo : IGenericRepo<MedicineStatus>
     {
         private AppDbContext _databaseRepo;
 
@@ -43,7 +43,7 @@ namespace Slottet.Infrastructure
             return await _databaseRepo.MedicineStatuses.ToListAsync();
         }
 
-        public async Task<MedicineStatus> GetByIdAsync(int id)
+        public async Task<MedicineStatus?> GetByIdAsync(int id)
         {
             return await _databaseRepo.MedicineStatuses.FindAsync(id);
         }

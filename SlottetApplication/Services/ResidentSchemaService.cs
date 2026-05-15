@@ -16,13 +16,12 @@ namespace Slottet.Application.Services
         {
             _repo = repo;
         }
-        public async Task<ResidentSchemaDto> AddResidentSchemaAsync(CreateResidentSchemaDto dto)
+        public async Task<ResidentSchemaDto> AddResidentSchemaAsync(ResidentSchemaDto dto)
         {
             var entity = new ResidentSchema
             {
                 Name = dto.Name,
                 TrafficLight = dto.TrafficLight,
-                MedicineStatuses = dto.MedicineStatuses,
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
@@ -32,7 +31,6 @@ namespace Slottet.Application.Services
             {
                 Name = dto.Name,
                 TrafficLight = dto.TrafficLight,
-                MedicineStatuses = dto.MedicineStatuses,
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
@@ -56,7 +54,6 @@ namespace Slottet.Application.Services
                     Id = entity.Id,
                     Name = entity.Name,
                     TrafficLight = entity.TrafficLight,
-                    MedicineStatuses = entity.MedicineStatuses,
                     Employee = entity.Employee,
                     Note = entity.Note,
                 });
@@ -64,7 +61,7 @@ namespace Slottet.Application.Services
             return dtos.ToArray();
         }
 
-        public async Task<ResidentSchemaDto> GetResidentSchemaByIdAsync(int id)
+        public async Task<ResidentSchemaDto?> GetResidentSchemaByIdAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
             if (entity == null) return null;
@@ -74,15 +71,37 @@ namespace Slottet.Application.Services
                 Id = entity.Id,
                 Name = entity.Name,
                 TrafficLight = entity.TrafficLight,
-                MedicineStatuses = entity.MedicineStatuses,
                 Employee = entity.Employee,
                 Note = entity.Note,
             };
         }
         //To do
-        public async Task UpdateResidentSchemaAsync(UpdateResidentSchemaDto dto)
+        public async Task<ResidentSchemaDto> UpdateResidentSchemaAsync(ResidentSchemaDto dto)
         {
-            throw new NotImplementedException();
+            var schema = await _repo.GetByIdAsync(dto.Id);
+
+            if (schema == null)
+            {
+                throw new KeyNotFoundException("fandt ikke borger");
+
+            }
+
+
+            schema.Name = dto.Name;
+            schema.TrafficLight = dto.TrafficLight;
+            schema.Employee = dto.Employee;
+            schema.Note = dto.Note;
+
+            await _repo.UpdateAsync(schema);
+
+            return new ResidentSchemaDto
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                TrafficLight = dto.TrafficLight,
+                Employee = dto.Employee,
+                Note = dto.Note,
+            };
         }
     }
 }
