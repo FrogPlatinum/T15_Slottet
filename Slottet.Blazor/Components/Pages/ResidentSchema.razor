@@ -1,6 +1,7 @@
 ﻿@using Slottet.Shared.DTOs.ResidentSchema
 @using Slottet.Shared.DTOs.MedicinStatus
 @inject HttpClient Http
+@inject IJSRuntime JS
 @page "/residentschema"
 @rendermode InteractiveServer
 
@@ -108,8 +109,8 @@
 				</tr>
 				
 			</table>
-@* 
-			<button class="deleteSchemaButton" @onclick="DeleteSchema"> Slet Borgerfelt</button> *@
+
+			<button class="btn btn-sm btn-danger" @onclick="()=>DeleteSchema(schema.Id, schema.Name)"> Slet Borgerfelt</button>
 		</div>
 	}
 		
@@ -175,7 +176,7 @@
 	private ResidentSchemaDto newSchema = new();
 	// private List<ResidentSchemaDto> schemas = new();
 	//Add empty residentSchema
-	public async Task CreateAsync()
+	private async Task CreateAsync()
 	{
 
 		if (!string.IsNullOrWhiteSpace(newSchema.Name))
@@ -198,5 +199,18 @@
 	{
 		await CreateAsync();
 	}
+	private async Task DeleteSchema(int id, string name)
+	{
 
+		var confirmed = await JS.InvokeAsync<bool>("confirm", $"Er du sikker på du vil slette borgerfeltet tilhørende {name}?");
+		if (!confirmed)
+			return;
+
+		var response = await Http.DeleteAsync($"api/ResidentSchema/{id}");
+
+		if (response.IsSuccessStatusCode)
+		{
+			await GetAllResidentSchemas();
+		}
+	}
 }
