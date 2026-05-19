@@ -52,6 +52,7 @@
 				<td class="trafficyellow">gul</td>
 				<td class ="trafficgreen">grøn</td> *@
 
+
 					@* <InputSelect @bind-Value="@schema.TrafficLight">
 
 						@foreach (var trafficLight in Enum.GetValues(typeof(ResidentSchemaDto.TrafficLightStatus.TrafficLight)))
@@ -116,32 +117,35 @@
 		
 
 		@* Add Button *@	
-		@* <button class="addSchemaButton" @onclick="ShowAddNewSchemaForm"> Tilføj Borgerfelt </button> *@
-	<div class="newSchema"> 
-		@* Name*@
-		<label> Borger Initialer:</label>
-		<input class="form-control" @bind="newSchema.Name"/>
-		@* Traffic light? Maybe we don't need this in the create form?*@
-		<label class="mt-2">Trafiklys</label>
-		<select class="form-control-color" @bind="newSchema.TrafficLight">
-		
-			
-			<option value="Green">Grøn</option>
-			<option value="Yellow">Gul</option>
-			<option value="Red">Rød</option>
-		</select>
-		@* Medicine Time? I'll wait with this one.. I might have an idea for adding times!*@
-		@* <label></label>
+		<button class="addSchemaButton" @onclick="() => showAddNewSchemaForm = !showAddNewSchemaForm"> Tilføj Borgerfelt </button>
+		@if (showAddNewSchemaForm)
+	{
+		<div class="newSchema"> 
+			@* Name*@
+			<label> Borger Initialer:</label>
+			<input class="form-control" @bind="newSchema.Name"/>
+			@* Traffic light? Maybe we don't need this in the create form?*@
+			<label class="mt-2">Trafiklys</label>
+			<select class="form-control-color" @bind="newSchema.TrafficLight">
+
+
+				<option value="Green">Grøn</option>
+				<option value="Yellow">Gul</option>
+				<option value="Red">Rød</option>
+			</select>
+			@* Medicine Time? I'll wait with this one.. I might have an idea for adding times!*@
+			@* <label></label>
 		<label class="mt-2"></label> *@
-		@* Employeee Section *@
-		<label> Medarbejder:</label>
-		<input class="form-control" @bind="newSchema.Employee" />
-		@*Note*@
-		<label> Note:</label>
-		<input class="form-control" @bind="newSchema.Note" />
-		<button type="button" class="btn btn-primary mt-3" @onclick="AddNewSchema">Tilføj Borger</button>
-	</div>
-	</div>
+			@* Employeee Section *@
+			<label> Medarbejder:</label>
+			<input class="form-control" @bind="newSchema.Employee" />
+			@*Note*@
+			<label> Note:</label>
+			<input class="form-control" @bind="newSchema.Note" />
+			<button type="button" class="btn btn-primary mt-3" @onclick="AddNewSchema">Tilføj Borger</button>
+		</div>
+	}
+</div>
 
 @code {
 	// Resident Schema
@@ -152,11 +156,7 @@
 	{
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
-	// private List<ResidentSchemaDto> _schemas = new List<ResidentSchemaDto>;
-	// public async Task GetAllResidentSchemas()
-	// {
-	// 	_schemas = await Http.GetFromJsonAsync<List<ResidentSchemaDto>>("api/ResidentSchema/allschemas");
-	// }
+
 	//Medicine Status
 
 	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
@@ -173,9 +173,12 @@
 		await GetAllMedicineStatuses();
 	}
 
+	// For showing/not showing the resident creation form:
+	private bool showAddNewSchemaForm = false;
+
 	private ResidentSchemaDto newSchema = new();
-	// private List<ResidentSchemaDto> schemas = new();
-	//Add empty residentSchema
+
+	//Add filled out Resident Schema
 	private async Task CreateAsync()
 	{
 
@@ -186,19 +189,19 @@
 			{
 				await GetAllResidentSchemas();
 				newSchema = new ResidentSchemaDto();
+				showAddNewSchemaForm = false;
 			}
 		}
 
 	}
-	// public async Task DeleteAsync()
-	// {
-	// 	_statuses = await Http.DeleteFromJsonAsync("api/ResidentSchema/");
-	// }
-
+	
+	// For Button
 	private async Task AddNewSchema(MouseEventArgs args)
 	{
 		await CreateAsync();
 	}
+
+	// Delete a Resident Schema
 	private async Task DeleteSchema(int id, string name)
 	{
 
@@ -213,4 +216,17 @@
 			await GetAllResidentSchemas();
 		}
 	}
+	// Update a Resident Schema - there's no corresponding buttons yet.
+	private async Task UpdateSchema(ResidentSchemaDto schema)
+	{
+		
+		var response = await Http.PutAsJsonAsync($"api/ResidentSchema/{schema.Id}", schema);
+		if (response.IsSuccessStatusCode)
+		{
+			await GetAllResidentSchemas();
+			
+		}
+
+	}
+	
 }
