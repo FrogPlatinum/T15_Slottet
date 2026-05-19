@@ -2,7 +2,7 @@
 @using Slottet.Shared.DTOs.MedicinStatus
 @inject HttpClient Http
 @page "/residentschema"
-
+@rendermode InteractiveServer
 
 	
 		<!--
@@ -46,9 +46,10 @@
 				
 				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
 				<tr>
-				<td class="trafficred">rød</td>
+				<td>@schema.TrafficLight</td>
+				@* <td class="trafficred">rød</td>
 				<td class="trafficyellow">gul</td>
-				<td class ="trafficgreen">grøn</td>
+				<td class ="trafficgreen">grøn</td> *@
 
 					@* <InputSelect @bind-Value="@schema.TrafficLight">
 
@@ -107,97 +108,54 @@
 				</tr>
 				
 			</table>
+@* 
+			<button class="deleteSchemaButton" @onclick="DeleteSchema"> Slet Borgerfelt</button> *@
 		</div>
 	}
-		<div class="individualSchemas">
-
-			<table style="width:100%">
-				
-				@* Resident "Name" *@
-				
-				<tr>
-					<th colspan="10" class="Name"><h2>Tomt</h2></th>
-				</tr>
-				
-				
-
-				@* Traffic Light *@
-				<tr>
-					<th colspan="10">Status(trafik)</th>
-				</tr>
-				
-				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
-				<tr>
-				<td class="trafficRed">Rød</td>
-				<td class="trafficYellow">Gul</td>
-				<td class ="trafficGreen">Grøn</td>
-				</tr>
-
-				@* Medicine Status *@
-				<tr>
-					<th colspan="10">Medicintider</th>
-	
-				</tr>
 		
-				<tr>
-					<td>tid</td>
-					@* @foreach (var status in _statuses)
-					{
-						@if (schema.Id == status.ResidentSchemaId)
-						{
-					<td>
-								<div>
-						@status.Time.ToString("HH:mm")
-					
-
-								</div>
-								<div>
-					<input type="checkbox" @bind="status.Administered"/> 
-					
-								</div>
-							</td>
-		
-					}
-	} *@
-				
-			</tr>
-
-				@* Employees *@	
-
-				<tr>
-					<th colspan="10">Personale</th>
-				</tr>
-				<tr>
-					<td>Tom</td> <!-- 2 medarbejdere-->
-
-				</tr>
-				@* Notes *@	
-				
-				<tr>
-					<th colspan="10">Note</th>
-				</tr>
-				<tr>
-					<td colspan="10">Skriv note her</td>
-				</tr>
-				
-			</table>
-		</div>
 
 		@* Add Button *@	
-		<button class="addSchemaButton" @onclick="AddNewSchema"> Tilføj Borgerfelt </button>
-	
+		@* <button class="addSchemaButton" @onclick="ShowAddNewSchemaForm"> Tilføj Borgerfelt </button> *@
+	<div class="newSchema"> 
+		@* Name*@
+		<label> Borger Initialer:</label>
+		<input class="form-control" @bind="newSchema.Name"/>
+		@* Traffic light? Maybe we don't need this in the create form?*@
+		<label class="mt-2">Trafiklys</label>
+		<select class="form-control-color" @bind="newSchema.TrafficLight">
+		
+			
+			<option value="Green">Grøn</option>
+			<option value="Yellow">Gul</option>
+			<option value="Red">Rød</option>
+		</select>
+		@* Medicine Time? I'll wait with this one.. I might have an idea for adding times!*@
+		@* <label></label>
+		<label class="mt-2"></label> *@
+		@* Employeee Section *@
+		<label> Medarbejder:</label>
+		<input class="form-control" @bind="newSchema.Employee" />
+		@*Note*@
+		<label> Note:</label>
+		<input class="form-control" @bind="newSchema.Note" />
+		<button type="button" class="btn btn-primary mt-3" @onclick="AddNewSchema">Tilføj Borger</button>
+	</div>
 	</div>
 
 @code {
-	//Resident Schema
+	// Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
+
 
 	public async Task GetAllResidentSchemas()
 	{
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
-
-
+	// private List<ResidentSchemaDto> _schemas = new List<ResidentSchemaDto>;
+	// public async Task GetAllResidentSchemas()
+	// {
+	// 	_schemas = await Http.GetFromJsonAsync<List<ResidentSchemaDto>>("api/ResidentSchema/allschemas");
+	// }
 	//Medicine Status
 
 	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
@@ -215,18 +173,27 @@
 	}
 
 	private ResidentSchemaDto newSchema = new();
-	private List<ResidentSchemaDto> schemas = new();
+	// private List<ResidentSchemaDto> schemas = new();
 	//Add empty residentSchema
 	public async Task CreateAsync()
 	{
-		
-		var response = await Http.PostAsJsonAsync("api/ResidentSchema/AddAsync", newSchema);
-		var createdSchema = await response.Content.ReadFromJsonAsync<ResidentSchemaDto>();
-		schemas.Add(createdSchema);
+
+		if (!string.IsNullOrWhiteSpace(newSchema.Name))
+		{ 
+			var response = await Http.PostAsJsonAsync("api/ResidentSchema/AddAsync", newSchema); 
+			if (response.IsSuccessStatusCode)
+			{
+				await GetAllResidentSchemas();
+				newSchema = new ResidentSchemaDto();
+			}
+		}
 
 	}
+	// public async Task DeleteAsync()
+	// {
+	// 	_statuses = await Http.DeleteFromJsonAsync("api/ResidentSchema/");
+	// }
 
-	
 	private async Task AddNewSchema(MouseEventArgs args)
 	{
 		await CreateAsync();
