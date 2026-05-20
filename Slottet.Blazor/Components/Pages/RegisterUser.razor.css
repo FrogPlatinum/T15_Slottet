@@ -1,0 +1,36 @@
+﻿body {
+	font-family: 'Verdana';
+}
+.registerForm {
+	font-family: 'Verdana';
+	background-color: lightblue;
+	max-width: max-content;
+}
+
+.registerForm {
+	border-radius: 15px;
+	border: 2px;
+	/*box-shadow: 3px 3px 3px;*/
+	padding: 10px;
+}
+
+.formGroup {
+	padding: 10px;
+}
+
+.registerButton {
+	background-color: aliceblue;
+	border-radius: 15px;
+	border: 10px;
+	padding: 10px;
+	/*box-shadow: 2px 2px 2px;*/
+	align-self: flex-start;
+	width: auto;
+	align-self: center;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.registerButton:hover {
+	background-color: steelblue;
+}
