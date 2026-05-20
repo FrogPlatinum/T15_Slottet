@@ -2,88 +2,81 @@
 @using Slottet.Shared.DTOs.MedicinStatus
 @inject HttpClient Http
 @page "/residentschema"
+@rendermode InteractiveServer
 
+<!--
+Step 1
+Tilføj bokse
 
-	
-		<!--
-	Step 1
-	Tilføj bokse
+Step 2
+Sørg for at oplysningerne er fra database
 
-	Step 2
-	Sørg for at oplysningerne er fra database
+Step 3
+Tilføj CSS kode med borders og linjeafstand
 
-	Step 3
-	Tilføj CSS kode med borders og linjeafstand
+Step 4
+Tilføj de andre bokse
 
-	Step 4
-	Tilføj de andre bokse
+Step 5
+Make it pretty
+-->
 
-	Step 5
-	Make it pretty
-	-->
+<h1>Alle Borgerfelter</h1>
+<div class="allSchemas">
 
-		<h1>Alle Borgerfelter</h1>
-	<div class="allSchemas">
-		
-@foreach (var schema in _schemas)
-{
-<div class="individualSchemas">
+	@foreach (var schema in _schemas)
+	{
+		<div class="individualSchemas">
 
 			<table style="width:100%">
-				
 				<tr>
 					<th colspan="10" class="Name"><h2>@schema.Name</h2></th>
 				</tr>
-				
-				
-
-
 				<tr>
 					<th colspan="10">Status(trafik)</th>
 				</tr>
-				
-				 <!--Hvor bestemmes dette? - Hvor bliver dette angivet?-->
-				<tr>
-				<td class="trafficRed">Rød</td>
-				<td class="trafficYellow">Gul</td>
-				<td class ="trafficGreen">Grøn</td>
-				</tr>
+				<tr> @* SetTrafficLight // .active in global (app.css) *@
+					<td class="trafficRed @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Red ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Red)">
+						Rød
+					</td>
 
+					<td class="trafficYellow @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Yellow ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Yellow)">
+						Gul
+					</td>
+
+					<td class="trafficGreen @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Green ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Green)">
+						Grøn
+					</td>
+				</tr>
 				<tr>
 					<th colspan="10">Medicintider</th>
-	
 				</tr>
-			@* @if ( ResidentSchemaDto.Id == MedicineStatusDto.ResidentSchemaId)
+				@* @if ( ResidentSchemaDto.Id == MedicineStatusDto.ResidentSchemaId)
 			{ *@
-		
 				<tr>
 					@foreach (var status in _statuses)
 					{
 						@if (schema.Id == status.ResidentSchemaId)
 						{
-					<td>
+							<td>
 								<div>
-						@status.Time.ToString("HH:mm")
-					@* <td>15:00</td>
-					<td>17:00</td>
-					<td>17:30</td> *@
-
-								</div>
-								<div>
-					<input type="checkbox" @bind="status.Administered"/> 
-					@* <td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td>
-					<td><input type="checkbox" /></td> *@
+									@status.Time.ToString("HH:mm")
+									<td>15:00</td>
+									<td>17:00</td>
+									<td>17:30</td>
+								
+									<input type="checkbox" @bind="status.Administered" />
+									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" /></td>
 								</div>
 							</td>
-		
-					}
-	}
-				
-			</tr>
-				
-					
-
+						}
+				}
+				</tr>
 				<tr>
 					<th colspan="10">Personale</th>
 				</tr>
@@ -91,31 +84,37 @@
 					<td>@schema.Employee</td> <!-- 2 medarbejdere-->
 
 				</tr>
-				
-				
 				<tr>
 					<th colspan="10">Note</th>
 				</tr>
 				<tr>
 					<td colspan="10">@schema.Note</td>
 				</tr>
-				
 			</table>
 		</div>
 	}
-	</div>
+</div>
 
 @code {
+
 	//Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
-	
+
 	public async Task GetAllResidentSchemas()
 	{
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
 
+    //Traffic Light Status
+	private void SetTrafficLight(ResidentSchemaDto resident, Domain.Enums.TrafficLightStatus status)
+	{
+        Console.WriteLine($"Setting traffic light for {resident.Name} to {status}");
+		resident.TrafficLight = status;
+        StateHasChanged();
+	}
+
 	//Medicine Status
-	
+
 	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
 
 	public async Task GetAllMedicineStatuses()
