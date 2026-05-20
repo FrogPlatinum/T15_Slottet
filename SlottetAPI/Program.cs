@@ -5,6 +5,11 @@ using Slottet.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Slottet.Application.Interfaces;
 using Slottet.Application.Services;
+using Slottet.Domain.Entity;
+using Slottet.Application.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,11 +24,37 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IResidentSchemaRepo, ResidentSchemaDBrepo>();
-builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
+builder.Services.AddDbContext<UserDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("UserDbConnection")));
 
-builder.Services.AddScoped<IMedicineStatusRepo, MedicineStatusDBRepo>();
+//DI
+builder.Services.AddScoped<IGenericRepo<ResidentSchema>, ResidentSchemaDBrepo>();
+builder.Services.AddScoped<IUserRepo, UserDbRepo>();
+builder.Services.AddScoped<IResidentSchemaService, ResidentSchemaService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IGenericRepo<MedicineStatus>, MedicineStatusDBRepo>();
 builder.Services.AddScoped<IMedicineStatusService, MedicineStatusService>();
+
+//JWT settings
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("Jwt"));
+
+//Authentication schema
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidateLifetime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+            ValidateIssuerSigningKey = true
+        };
+    });
 
 var app = builder.Build();
 
@@ -41,9 +72,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

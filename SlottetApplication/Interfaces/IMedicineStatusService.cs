@@ -13,7 +13,7 @@ namespace Slottet.Application.Interfaces
         Task<MedicineStatusDto> GetMedicineStatusByIdAsync(int id);
         Task<MedicineStatusDto[]> GetAllMedicineStatusAsync();
         Task<MedicineStatusDto> AddMedicineStatusAsync(MedicineStatusDto dto);
-        Task UpdateMedicineStatusAsync(MedicineStatusDto dto);
+        Task<MedicineStatusDto> UpdateMedicineStatusAsync(MedicineStatusDto dto);
         Task DeleteMedicineStatusAsync(int id);
     }
 }

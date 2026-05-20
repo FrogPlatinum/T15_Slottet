@@ -11,9 +11,9 @@ using Slottet.Infrastructure.Data;
 
 namespace Slottet.Infrastructure
 {
-    public class ResidentSchemaDBrepo : IResidentSchemaRepo
+    public class ResidentSchemaDBrepo : IGenericRepo<ResidentSchema>
     {
-        private AppDbContext _databaseRepo;
+        private readonly AppDbContext _databaseRepo;
 
         public ResidentSchemaDBrepo(AppDbContext dbContext)
         {
@@ -60,13 +60,9 @@ namespace Slottet.Infrastructure
             //    schemaUpdate.Note = entity.Note;
             //}
             //_databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
-            ////_databaseRepo.ResidentSchemas.Update(entity);
-            //await _databaseRepo.SaveChangesAsync(); 
-            //return;
-
             _databaseRepo.ResidentSchemas.Update(entity);
-            await _databaseRepo.SaveChangesAsync();
-
+            await _databaseRepo.SaveChangesAsync(); 
+            return;
 
         }
     }

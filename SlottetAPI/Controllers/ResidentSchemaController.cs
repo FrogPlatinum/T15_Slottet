@@ -6,7 +6,7 @@ namespace Slottet.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ResidentSchemaController : Controller
+    public class ResidentSchemaController : ControllerBase
     {
         private readonly IResidentSchemaService _residentSchemaRepo;
 

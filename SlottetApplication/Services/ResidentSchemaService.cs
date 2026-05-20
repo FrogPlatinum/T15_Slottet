@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using Microsoft.EntityFrameworkCore;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Shared.DTOs.ResidentSchema;
-
 
 namespace Slottet.Application.Services
 {
     public class ResidentSchemaService : IResidentSchemaService
     {
-        private readonly IResidentSchemaRepo _repo;
-
-        
-        public ResidentSchemaService(IResidentSchemaRepo repo)
+        private readonly IGenericRepo<ResidentSchema> _repo;
+        public ResidentSchemaService(IGenericRepo<ResidentSchema> repo)
         {
             _repo = repo;
         }
@@ -34,7 +29,6 @@ namespace Slottet.Application.Services
 
             return new ResidentSchemaDto
             {
-                Id = dto.Id,
                 Name = dto.Name,
                 TrafficLight = dto.TrafficLight,
                 Employee = dto.Employee,
@@ -67,7 +61,7 @@ namespace Slottet.Application.Services
             return dtos.ToArray();
         }
 
-        public async Task<ResidentSchemaDto> GetResidentSchemaByIdAsync(int id)
+        public async Task<ResidentSchemaDto?> GetResidentSchemaByIdAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
             if (entity == null) return null;
@@ -84,23 +78,6 @@ namespace Slottet.Application.Services
         //To do
         public async Task<ResidentSchemaDto> UpdateResidentSchemaAsync(ResidentSchemaDto dto)
         {
-            //var entity = new ResidentSchema
-            //{
-            //    Name = dto.Name,
-            //    TrafficLight = dto.TrafficLight,
-            //    Employee = dto.Employee,
-            //    Note = dto.Note,
-            //};
-            //await _repo.UpdateAsync(entity);
-
-            //return new ResidentSchemaDto
-            //{
-            //    Name = dto.Name,
-            //    TrafficLight = dto.TrafficLight,
-            //    Employee = dto.Employee,
-            //    Note = dto.Note,
-            //};
-
             var schema = await _repo.GetByIdAsync(dto.Id);
 
             if (schema == null)
@@ -109,13 +86,13 @@ namespace Slottet.Application.Services
 
             }
 
-                    
-                    schema.Name = dto.Name;
-                    schema.TrafficLight = dto.TrafficLight;
-                    schema.Employee = dto.Employee;
-                    schema.Note = dto.Note;
 
-                    await _repo.UpdateAsync(schema);
+            schema.Name = dto.Name;
+            schema.TrafficLight = dto.TrafficLight;
+            schema.Employee = dto.Employee;
+            schema.Note = dto.Note;
+
+            await _repo.UpdateAsync(schema);
 
             return new ResidentSchemaDto
             {
@@ -125,10 +102,6 @@ namespace Slottet.Application.Services
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
-                
-            
-
-                
         }
     }
 }
