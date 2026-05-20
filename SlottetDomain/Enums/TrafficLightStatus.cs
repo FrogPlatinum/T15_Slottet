@@ -8,8 +8,8 @@ namespace Slottet.Domain.Enums
 {
     public enum TrafficLightStatus
     {
-        Green,
-        Yellow,
-        Red
+        Grøn,
+        Gul,
+        Rød
     }
 }

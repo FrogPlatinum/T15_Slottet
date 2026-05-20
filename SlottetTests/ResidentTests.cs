@@ -33,7 +33,7 @@ namespace SlottetTests
             var newResident = new ResidentSchema(
                 id: 2,
                 name: "Karl Karlson",
-                trafficLight: TrafficLightStatus.Yellow,
+                trafficLight: TrafficLightStatus.Gul,
                 employee: "Hans Hansen",
                 note: "Ny borger"
                 );
@@ -45,7 +45,7 @@ namespace SlottetTests
             Assert.IsNotNull(createdResidentSchema);
             Assert.AreEqual(2, createdResidentSchema.Id);
             Assert.AreEqual("Karl Karlson", createdResidentSchema.Name);
-            Assert.AreEqual(TrafficLightStatus.Yellow, createdResidentSchema.TrafficLight);
+            Assert.AreEqual(TrafficLightStatus.Gul, createdResidentSchema.TrafficLight);
             Assert.AreEqual("Hans Hansen", createdResidentSchema.Employee);
             Assert.AreEqual("Ny borger", createdResidentSchema.Note);
             //Find ud af teste nested classes, er medicinstatus id korrekt?
@@ -57,7 +57,7 @@ namespace SlottetTests
             var newResidentSchema = new ResidentSchema(
               id: 650,
               name: "Karl Karlson",
-              trafficLight: TrafficLightStatus.Yellow,
+              trafficLight: TrafficLightStatus.Gul,
               employee: "Hans Hansen",
               note: "Ny borger"
               );
@@ -67,7 +67,7 @@ namespace SlottetTests
             var updatedResidentSchema = await _residentDBRepo.GetByIdAsync(650);
 
             updatedResidentSchema.Name = "Niels Hansen Updated";
-            updatedResidentSchema.TrafficLight = TrafficLightStatus.Red;
+            updatedResidentSchema.TrafficLight = TrafficLightStatus.Rød;
             updatedResidentSchema.Employee = "Test Employee";
             updatedResidentSchema.Note = "Opdateret note";
 
@@ -79,7 +79,7 @@ namespace SlottetTests
             Assert.IsNotNull(updatedResidentSchema);
             Assert.AreEqual(650, updatedResidentSchema.Id);
             Assert.AreEqual("Niels Hansen Updated", updatedResidentSchema.Name);
-            Assert.AreEqual(TrafficLightStatus.Red, updatedResidentSchema.TrafficLight);
+            Assert.AreEqual(TrafficLightStatus.Rød, updatedResidentSchema.TrafficLight);
             Assert.AreEqual("Test Employee", updatedResidentSchema.Employee);
             Assert.AreEqual("Opdateret note", updatedResidentSchema.Note);
         }
@@ -92,7 +92,7 @@ namespace SlottetTests
             var deletedResidentSchema = new ResidentSchema(
               id: 700,
               name: "Karl Karlson",
-              trafficLight: TrafficLightStatus.Yellow,
+              trafficLight: TrafficLightStatus.Gul,
               employee: "Hans Hansen",
               note: "Ny borger"
               );
