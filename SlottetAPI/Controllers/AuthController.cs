@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,11 +35,19 @@ namespace Slottet.API.Controllers
             return Ok(token);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> RemoveUser(int id)
         {
             await authService.RemoveUserAsync(id);
             return Ok("Bruger slettet");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult AuthTest()
+        {
+            return Ok("Authenticated!");
         }
     }
 }
