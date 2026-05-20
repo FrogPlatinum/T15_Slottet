@@ -50,20 +50,9 @@ namespace Slottet.Infrastructure
 
         public async Task UpdateAsync(MedicineStatus entity)
         {
-            var schemaUpdate = await _databaseRepo.MedicineStatuses.FindAsync(entity.Id);
-            //if (schemaUpdate != null)
-            //{
-            //    schemaUpdate.Name = entity.Name;
-            //    schemaUpdate.TrafficLight = entity.TrafficLight;
-            //    schemaUpdate.MedicineStatuses = entity.MedicineStatuses;
-            //    schemaUpdate.Employee = entity.Employee;
-            //    schemaUpdate.Note = entity.Note;
-            //}
-            _databaseRepo.Entry(schemaUpdate).CurrentValues.SetValues(entity);
-            //_databaseRepo.ResidentSchemas.Update(entity);
+            _databaseRepo.MedicineStatuses.Update(entity);
             await _databaseRepo.SaveChangesAsync();
             return;
-
         }
     }
 }

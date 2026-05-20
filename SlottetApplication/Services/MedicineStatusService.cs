@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Shared.DTOs.MedicinStatus;
+using Slottet.Shared.DTOs.ResidentSchema;
 
 namespace Slottet.Application.Services
 {
@@ -79,7 +80,7 @@ namespace Slottet.Application.Services
 
             if (status == null)
             {
-                throw new KeyNotFoundException("fandt ikke borger");
+                throw new KeyNotFoundException("fandt ikke medicintid");
 
             }
 
@@ -97,6 +98,8 @@ namespace Slottet.Application.Services
                 Administered = dto.Administered,
                 ResidentSchemaId = dto.ResidentSchemaId,
             };
+
+           
         }
     }
 }
