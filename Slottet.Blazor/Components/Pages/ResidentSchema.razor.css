@@ -51,17 +51,23 @@ tr {
 .Name {
     background-color: transparent;
 }
-.trafficRed{
-    background-color:red;
+.trafficLight {
+    display: flex;
+    column-fill:balance-all;
+}
+.trafficRed {
+    background-color: red;
     color: white;
-    
+    width: 33.33%;
 }
 .trafficYellow {
     background-color: yellow;
+    width: 33.33%;
 }
 .trafficGreen {
     background-color: green;
     color: white;
+    width: 33.33%;
 }
 /*Buttons*/
 .addSchemaButton {
