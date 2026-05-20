@@ -27,7 +27,7 @@ namespace Slottet.Infrastructure.Data
 
             //Seeding
             modelBuilder.Entity<ResidentSchema>().HasData(
-                new ResidentSchema { Id = 1, Name = "Janne", TrafficLight = TrafficLightStatus.Yellow, Employee = "Susanne", Note = "..." });
+                new ResidentSchema { Id = 1, Name = "Janne", TrafficLight = TrafficLightStatus.Gul, Employee = "Susanne", Note = "..." });
 
             modelBuilder.Entity<MedicineStatus>().HasData(
                 new MedicineStatus { Id = 1, Time = new DateTime(2026, 3, 27, 11, 0, 0), Administered = true, ResidentSchemaId = 1 });

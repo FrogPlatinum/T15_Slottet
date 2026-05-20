@@ -44,11 +44,9 @@ namespace Slottet.API.Controllers
         [HttpPut("{id}")] //To do
         public async Task<IActionResult> UpdateAsync(int id, MedicineStatusDto entity)
         {
-            //if(id != entity.Id) return BadRequest("Inkorrekt id");
-            //    await _residentSchemaRepo.UpdateAsync(entity);
-            //return Ok(entity);
-
-            throw new NotImplementedException();
+            entity.Id = id;
+            await _medicineStatusRepo.UpdateMedicineStatusAsync(entity);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

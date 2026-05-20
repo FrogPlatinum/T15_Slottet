@@ -37,18 +37,18 @@ Make it pretty
 					<th colspan="10">Status(trafik)</th>
 				</tr>
 				<tr> @* SetTrafficLight // .active in global (app.css) *@
-					<td class="trafficRed @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Red ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Red)">
+					<td class="trafficRed @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Rød ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Rød)">
 						Rød
 					</td>
 
-					<td class="trafficYellow @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Yellow ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Yellow)">
+					<td class="trafficYellow @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Gul ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Gul)">
 						Gul
 					</td>
 
-					<td class="trafficGreen @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Green ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Green)">
+					<td class="trafficGreen @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Grøn ? "active" : "")"
+						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Grøn)">
 						Grøn
 					</td>
 				</tr>
