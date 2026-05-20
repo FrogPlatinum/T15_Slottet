@@ -1,4 +1,7 @@
-﻿
+﻿body {
+    font-family: 'Verdana';
+}
+
 .loginForm {
     font-family: 'Verdana';
     background-color: lightblue;
@@ -6,12 +9,10 @@
 }
 
 .loginForm {
-    border-top-left-radius: 25px;
-    border-radius: 25px;
+    border-radius: 15px;
     border: 2px;
-    box-shadow: 7px 7px 7px;
+    /*box-shadow: 3px 3px 3px;*/
     padding: 10px;
-    
 }
 
 .formGroup {
@@ -20,18 +21,17 @@
 
 .loginButton {
     background-color: aliceblue;
-    border-radius: 25px;
+    border-radius: 15px;
     border: 10px;
     padding: 10px;
-    box-shadow: 7px 7px 7px;
+    /*box-shadow: 2px 2px 2px;*/
     align-self: flex-start;
     width: auto;
     align-self: center;
     font-weight: bold;
+    font-size: 14px;
 }
 
     .loginButton:hover {
         background-color: steelblue;
     }
-
-
