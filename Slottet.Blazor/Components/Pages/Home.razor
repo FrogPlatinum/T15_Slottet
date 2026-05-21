@@ -1,13 +1,14 @@
-﻿@page "/"
+﻿@page "/dashboard"
 @using Slottet.Shared.DTOs.ResidentSchema
 @inject HttpClient Http
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
 
+<button class="mt-1" @onclick="NagivateToRegister"> Opret Bruger </button>
+<button class="mt-1" @onclick="NagivateToLogin"> Log Ud </button>
 <PageTitle>Driftstavle</PageTitle>
-<h1>Login</h1>
-<Login/>
 
-<h1>Opret Bruger</h1>
-<RegisterUser/>
+
 
 
 <h1>Driftstavle</h1>
@@ -17,5 +18,12 @@
 
 @code{
 
-
+	private void NagivateToRegister()
+	{
+		Navigation.NavigateTo("/registerUser");
+	}
+	private void NagivateToLogin()
+	{
+		Navigation.NavigateTo("/");
+	}
 }

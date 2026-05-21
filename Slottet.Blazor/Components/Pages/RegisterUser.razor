@@ -1,5 +1,6 @@
 ﻿@page "/registerUser"
-
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
 
 @* Form til login *@
 <div class="registerForm">
@@ -43,7 +44,13 @@
 			<button type="submit" class="registerButton">Opret Bruger</button>
 		</div>
 	</form>
+	<div class="formGroup">
+		<button class="registerButton" @onclick="NavigateToDashboard">Gå til Driftstavlen</button>
+	</div>
 </div>
 @code {
-
+	private void NavigateToDashboard()
+	{
+		Navigation.NavigateTo("/dashboard");
+	}
 }

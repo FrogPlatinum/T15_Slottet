@@ -1,5 +1,6 @@
-﻿@page "/login"
-
+﻿@page "/"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
 
 @* Form til login *@
 <div class="loginForm">
@@ -28,10 +29,17 @@
 
 	</div>
 	<div class="formGroup">
-	<button type="submit" class="loginButton">Log Ind</button>
+	<button type="submit" class="loginButton" >Log Ind</button>
 	</div>
+		
 </form>
+	<div class="formGroup">
+		<button class="loginButton" @onclick="NavigateToDashboard">Gå til Driftstavlen</button>
+	</div>
 </div>
 @code {
-
+	private void NavigateToDashboard()
+	{
+		Navigation.NavigateTo("/dashboard");
+	}
 }
