@@ -18,6 +18,8 @@ namespace Slottet.Application.Services
         }
         public async Task<ResidentSchemaDto> AddResidentSchemaAsync(ResidentSchemaDto dto)
         {
+            ValidateResidentSchemaDto(dto);
+
             var entity = new ResidentSchema
             {
                 Name = dto.Name,
@@ -78,6 +80,8 @@ namespace Slottet.Application.Services
         //To do
         public async Task<ResidentSchemaDto> UpdateResidentSchemaAsync(ResidentSchemaDto dto)
         {
+            ValidateResidentSchemaDto(dto);
+
             var schema = await _repo.GetByIdAsync(dto.Id);
 
             if (schema == null)
@@ -102,6 +106,21 @@ namespace Slottet.Application.Services
                 Employee = dto.Employee,
                 Note = dto.Note,
             };
+        }
+
+        private void ValidateResidentSchemaDto(ResidentSchemaDto dto)
+        {
+            // Validate input
+            if (string.IsNullOrWhiteSpace(dto.Name))
+            {
+                throw new ArgumentException("Navn påkrævet", nameof(dto.Name));
+            }
+
+            // Validate Name length
+            if (dto.Name.Length > 100)
+            {
+                throw new ArgumentException("Navn må ikke overstige 100 tegn", nameof(dto.Name));
+            }
         }
     }
 }
