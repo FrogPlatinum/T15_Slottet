@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 using Slottet.Application.Interfaces;
 using Slottet.Domain.Entity;
 using Slottet.Shared.DTOs.MedicinStatus;
@@ -18,12 +19,15 @@ namespace Slottet.Application.Services
         }
         public async Task<MedicineStatusDto> AddMedicineStatusAsync(MedicineStatusDto dto)
         {
+            // Validate input DTO
+            Validate(dto);
+
             var entity = new MedicineStatus
             {
                 Time = dto.Time,
                 Administered = dto.Administered,
                 ResidentSchemaId = dto.ResidentSchemaId
-               
+
             };
             await _repo.AddAsync(entity);
 
@@ -75,6 +79,9 @@ namespace Slottet.Application.Services
         //To do
         public async Task<MedicineStatusDto> UpdateMedicineStatusAsync(MedicineStatusDto dto)
         {
+            // Validate input DTO
+            Validate(dto);
+
             var status = await _repo.GetByIdAsync(dto.Id);
 
             if (status == null)
@@ -97,6 +104,17 @@ namespace Slottet.Application.Services
                 Administered = dto.Administered,
                 ResidentSchemaId = dto.ResidentSchemaId,
             };
+        }
+        private void Validate(MedicineStatusDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(nameof(dto), "MedicineStatusDto må ikke være null.");
+            }
+            if (dto.ResidentSchemaId <= 0)
+            {
+                throw new ArgumentException("ResidentSchemaId må ikke være 0.", nameof(dto.ResidentSchemaId));
+            }
         }
     }
 }
