@@ -38,17 +38,17 @@ Make it pretty
 				</tr>
 				<tr> @* SetTrafficLight // .active in global (app.css) *@
 					<td class="trafficRed @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Red ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Red)">
+						@onclick="async () => await SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Red)">
 						Rød
 					</td>
 
 					<td class="trafficYellow @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Yellow ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Yellow)">
+						@onclick="async () => await SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Yellow)">
 						Gul
 					</td>
 
 					<td class="trafficGreen @(schema.TrafficLight == Domain.Enums.TrafficLightStatus.Green ? "active" : "")"
-						@onclick="() => SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Green)">
+						@onclick="async () => await SetTrafficLight(schema, Domain.Enums.TrafficLightStatus.Green)">
 						Grøn
 					</td>
 				</tr>
@@ -137,10 +137,15 @@ Make it pretty
 	}
 
     //Traffic Light Status
-	private void SetTrafficLight(ResidentSchemaDto resident, Domain.Enums.TrafficLightStatus status)
+	private async Task SetTrafficLight(ResidentSchemaDto resident, Domain.Enums.TrafficLightStatus status)
 	{
         Console.WriteLine($"Setting traffic light for {resident.Name} to {status}");
 		resident.TrafficLight = status;
+        var response = await Http.PutAsJsonAsync($"api/ResidentSchema/{resident.Id}", resident);
+        if (!response.IsSuccessStatusCode)
+		{
+			Console.WriteLine($"Traffiklys fejl: {response.StatusCode}");
+        }
         StateHasChanged();
 	}
 
