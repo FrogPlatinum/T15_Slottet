@@ -8,7 +8,7 @@ Clean Architecture
 Distributed Systems  
 Blazor Web Application  
 JWT Tokens (Authentication & Authorization)  
-EF-core for database handling  
+EF-Core (for database handling)  
 Class Libraries  
 Dependency Injection  
 Services  
