@@ -1,6 +1,9 @@
 ﻿@page "/"
+@using Slottet.Shared.DTOs
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
+@inject HttpClient Http
+@inject IJSRuntime JS
 
 @* Form til login *@
 <div class="loginForm">
@@ -12,7 +15,7 @@
 	</div>
 
 	<div>
-	<input type="text" placeholder="Indtast Brugernavn" name="username" required />
+	<input type="text" placeholder="Indtast Brugernavn" name="username" @bind-value="loginUser.Username" required />
 	</div>
 
 	</div>
@@ -24,12 +27,12 @@
 	</div>
 
 	<div>
-	<input type="password" placeholder="Indtast Kodeord" name="password" required>
+	<input type="password" placeholder="Indtast Kodeord" name="password" @bind-value="loginUser.Password" required>
 	</div>
 
 	</div>
 	<div class="formGroup">
-	<button type="submit" class="loginButton" >Log Ind</button>
+	<button type="submit" class="loginButton" @onclick="LoginUser" >Log Ind</button>
 	</div>
 		
 </form>
@@ -38,8 +41,27 @@
 	</div>
 </div>
 @code {
+
+	private UserDto loginUser = new();
+
 	private void NavigateToDashboard()
 	{
 		Navigation.NavigateTo("/dashboard");
+	}
+
+	private async Task LoginUser()
+	{
+		var response = await Http.PostAsJsonAsync("api/Auth/login", loginUser);
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return;
+		}
+
+		var token = await response.Content.ReadAsStringAsync();
+
+		await JS.InvokeVoidAsync("localStorage.setItem", "authToken", token);
+
+		NavigateToDashboard();
 	}
 }

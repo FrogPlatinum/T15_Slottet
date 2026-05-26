@@ -1,5 +1,6 @@
 ﻿@using Slottet.Shared.DTOs.ResidentSchema
 @using Slottet.Shared.DTOs.MedicinStatus
+@using System.Net.Http.Headers
 @inject HttpClient Http
 @inject IJSRuntime JS
 @page "/residentschema"
@@ -128,6 +129,7 @@ Make it pretty
 </div>
 
 @code {
+
 	// Resident Schema
 	private ResidentSchemaDto[] _schemas = Array.Empty<ResidentSchemaDto>();
 
@@ -137,16 +139,15 @@ Make it pretty
 		_schemas = await Http.GetFromJsonAsync<ResidentSchemaDto[]>("api/ResidentSchema/allschemas") ?? Array.Empty<ResidentSchemaDto>();
 	}
 
-    //Traffic Light Status
+	//Traffic Light Status
 	private void SetTrafficLight(ResidentSchemaDto resident, Domain.Enums.TrafficLightStatus status)
 	{
-        Console.WriteLine($"Setting traffic light for {resident.Name} to {status}");
+		Console.WriteLine($"Setting traffic light for {resident.Name} to {status}");
 		resident.TrafficLight = status;
-        StateHasChanged();
+		StateHasChanged();
 	}
 
 	//Medicine Status
-
 	private MedicineStatusDto[] _statuses = Array.Empty<MedicineStatusDto>();
 
 	public async Task GetAllMedicineStatuses()
@@ -166,6 +167,17 @@ Make it pretty
 
 	private ResidentSchemaDto newSchema = new();
 
+	//Token
+	private async Task SetAuthHeaderAsync()
+	{
+		var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+
+		if (!string.IsNullOrWhiteSpace(token))
+		{
+			Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+		}
+	}
+
 	//Add filled out Resident Schema
 	private async Task CreateAsync()
 	{
@@ -182,7 +194,7 @@ Make it pretty
 		}
 
 	}
-	
+
 	// For Button
 	private async Task AddNewSchema(MouseEventArgs args)
 	{
@@ -192,6 +204,8 @@ Make it pretty
 	// Delete a Resident Schema
 	private async Task DeleteSchema(int id, string name)
 	{
+
+		await SetAuthHeaderAsync();
 
 		var confirmed = await JS.InvokeAsync<bool>("confirm", $"Er du sikker på du vil slette borgerfeltet tilhørende {name}?");
 		if (!confirmed)
