@@ -1,6 +1,6 @@
 # T15\_Slottet
 
-<h3>In this program we have explored the following topics:</h3>
+<h2>In this program we have explored the following topics:</h2>
 
 API with Controller  
 Dtos  
