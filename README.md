@@ -4,13 +4,13 @@
 
 API with Controller  
 Dtos  
-Clean architecture   
-Distributed systems  
+Clean Architecture   
+Distributed Systems  
 Blazor Web Application  
-JWT tokens (Authentication & Authorization)  
+JWT Tokens (Authentication & Authorization)  
 EF-core for database handling  
 Class Libraries  
-Dependency injection  
+Dependency Injection  
 Services  
 Middleware  
 Tests  
