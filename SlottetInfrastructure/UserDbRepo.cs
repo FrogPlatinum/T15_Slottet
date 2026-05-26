@@ -45,9 +45,9 @@ namespace Slottet.Infrastructure
             return await _repo.Users.FindAsync(id);
         }
 
-        public Task<User?> GetByUserName(string name)
+        public async Task<User?> GetByUserName(string name)
         {
-            return _repo.Users.FirstOrDefaultAsync(u => u.Username == name);
+            return await _repo.Users.FirstOrDefaultAsync(u => u.Username == name);
         }
 
         public async Task UpdateAsync(User entity)
